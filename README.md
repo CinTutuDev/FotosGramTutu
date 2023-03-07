@@ -1,8 +1,6 @@
 <p align="center"> 
-<img src="https://readme-typing-svg.demolab.com?font=Libre+Baskerville&size=40&duration=3100&pause=2500&color=ff3d5c&center=true&vCenter=true&width=940&lines=FotosgramTutu" align="middle" alt="fotosgram" width="100%"/>
-</p>
-
-  <p align="center"><img  src="assets\fgt.gif"></p>
+<img src="https://readme-typing-svg.demolab.com?font=Libre+Baskerville&size=40&duration=3100&pause=500&color=ff3d5c&center=true&vCenter=true&width=940&lines=FotosgramTutu" align="middle" alt="fotosgram" width="100%"/>
+  <p align="center"><img  src="src\assets\fgtb.gif" width=300></p>
 
 ## Creo el proyecto con tabs:
 
