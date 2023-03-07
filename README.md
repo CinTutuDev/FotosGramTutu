@@ -14,3 +14,9 @@ ionic start FotosgramTutu tabs
  ```
  ? Create free Ionic account? No
  ```
+* Generar paginas pero saber antes que se va a instalar 
+	ionic g page pages/inicio --dry-run
+	(✔ver antes sin el archivo de prueba: )
+	ionic g page pages/inicio --dry-run --spec=false
+	(✔para descargar los modulos: 'si archivo de prueba' )
+	ionic g page pages/inicio --spec=false
