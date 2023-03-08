@@ -135,6 +135,8 @@ Enter
 Y nos crea la interfaces <br>
 Nota❗👀 tenemos que tener extensión JSON to TS
 
-
-
+## Crear modulo  ionic g m components
+ ```
+ ionic g m components
+```
 
