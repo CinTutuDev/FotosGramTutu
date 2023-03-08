@@ -45,9 +45,10 @@ mongod
 * Terminal 2º Vamos al backend/server (ionic\BackendFotogramServe>)
 <br>
   ❗❗Si no tenemos la carpeta dist ejecutamos el comando:
- ```
- tsc
- ```
+  
+  ```
+  tsc
+  ```
    Nos creará el directorio dist/ qie es el producto de nuestra app. Y levantamos back :
 ```
 nodemon dist/
