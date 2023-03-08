@@ -13,7 +13,8 @@ export class Tab1Page implements OnInit {
     /*     throw new Error('Method not implemented.'); */
 
     this.postsService.getPosts().subscribe((resp) => {
-      console.log(resp);
+      console.log(resp.posts);
+      console.log(resp.posts[0].mensaje);
     });
   }
 }
