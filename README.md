@@ -55,10 +55,8 @@ nodemon dist/
       ó
 node dist/
 ```
-
-
-
-
+* 3º Ir a Postman y hacer una petición para confirmar que todo va bien:
+![comprobacionPost](https://user-images.githubusercontent.com/71487857/223683037-eae52992-e01d-4abf-913b-a4053b2c100f.png)
 
 
 
