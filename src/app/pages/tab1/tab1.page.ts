@@ -1,3 +1,4 @@
+import { Post } from './../../interfaces/interfaces';
 import { Component, OnInit } from '@angular/core';
 import { PostsService } from '../../services/posts.service';
 
@@ -7,6 +8,10 @@ import { PostsService } from '../../services/posts.service';
   styleUrls: ['tab1.page.scss'],
 })
 export class Tab1Page implements OnInit {
+
+  //ALmacenar los post
+  posts : Post [] | any = [];
+
   constructor(private postsService: PostsService) {}
 
   ngOnInit(): void {
@@ -15,6 +20,7 @@ export class Tab1Page implements OnInit {
     this.postsService.getPosts().subscribe((resp) => {
       console.log(resp.posts);
       console.log(resp.posts[0].mensaje);
+      this.posts.push(...resp.posts)
     });
   }
 }
