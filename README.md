@@ -147,8 +147,11 @@ ionic g c components/posts --spec=false
 ```
 import { PostComponent } from './post/post.component';
 import { PostsComponent } from './posts/posts.component';
+import { IonicModule } from '@ionic/angular';
 
 @NgModule({
   declarations: [PostComponent, PostsComponent],
-  exports: [PostComponent, PostsComponent],
+  exports: [PostsComponent],
+  imports: [CommonModule, IonicModule],
+})
 ```  
