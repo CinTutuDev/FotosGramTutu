@@ -114,9 +114,26 @@ tsc
 ```
 * Volver a lentar todo
 
-
-
-
+## Para crear JSON:
+* 1º Ir al Postaman y hacer peticion GET de pg y copiar toda la respuesta del body
+![PeticionGETServer](https://user-images.githubusercontent.com/71487857/223685657-4d394899-38ff-452d-802b-107b1b548a01.png)
+* 2º copiar del body: ctrl +a +c
+```
+ {
+    "ok": true,
+    "pg": 1,
+    "posts": [
+        {
+            "_id": "640879e8d5a
+            ...
+```
+* 3º Ir al visualcode crear interface (interface.ts) 
+```
+Ctrl +  shift  + v 
+Enter
+```
+Y nos crea la interfaces <br>
+Nota❗👀 tenemos que tener extensión JSON to TS
 
 
 
