@@ -24,3 +24,28 @@ ionic start FotosgramTutu tabs
 	(✔para descargar los modulos: 'si archivo de prueba' )
 	ionic g page pages/login --spec=false
 ```
+## Levantar app
+```
+ionic serve
+```
+## Levantar mis servicios backend URL GitHub 
+ * URl
+```
+https://github.com/CinTutuDev/BackendFotogramServe
+```
+* Clone 
+```
+https://github.com/CinTutuDev/BackendFotogramServe.git
+```
+
+
+
+
+
+
+
+
+
+
+
+
