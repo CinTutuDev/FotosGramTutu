@@ -68,8 +68,13 @@ mongod
 ```
 nodemon dist
 ```
-
-
+## Creo servicio para traerme todos los Posts que entran en Bakend 
+* Pruebo peticion en Posman:
+![PeticionGETServer](https://user-images.githubusercontent.com/71487857/223685657-4d394899-38ff-452d-802b-107b1b548a01.png)
+* Creo el servicio
+```
+ionic g s services/posts --skip-tests
+```
 
 
 
