@@ -88,4 +88,28 @@ import { HttpClientModule }  from '@angular/common/http'
 import { HttpClient } from '@angular/common/http';
 onstructor(private http: HttpClient) { }
 ```
+## 📌🎈❗❗ Si sale este error
+
+* 'Access-Control-Allow-Origin'
+* Ir a backend (D:\ionic\BackendFotogramServe\index.ts) y poner este trozo de cod:
+```
+server.app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+```
+* Luego hacer en terminal dentro del back para transpilar en el dist/ todo (\ionic\BackendFotogramServe> ):
+```
+tsc
+```
+* Volver a lentar todo
+
+
+
+
+
+
+
 
