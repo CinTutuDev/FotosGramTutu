@@ -24,11 +24,11 @@ ionic start FotosgramTutu tabs
 	(✔para descargar los modulos: 'si archivo de prueba' )
 	ionic g page pages/login --spec=false
 ```
-## Levantar app
+## 🏍 Levantar app
 ```
 ionic serve
 ```
-## Levantar mis servicios backend URL GitHub 
+## 🎮 Levantar mis servicios backend URL GitHub 
  * URl
 ```
 https://github.com/CinTutuDev/BackendFotogramServe
@@ -57,6 +57,17 @@ node dist/
 ```
 * 3º Ir a Postman y hacer una petición para confirmar que todo va bien:
 ![comprobacionPost](https://user-images.githubusercontent.com/71487857/223683037-eae52992-e01d-4abf-913b-a4053b2c100f.png)
+
+## 🕹 En resumen para trabajar el la app:
+```
+ionic serve
+```
+```
+mongod
+```
+```
+nodemon dist
+```
 
 
 
