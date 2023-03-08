@@ -76,9 +76,13 @@ nodemon dist
 ```
 ionic g s services/posts --skip-tests
 ```
-
-
-
-
+* Import de http (src\app\app.module.ts)
+import { HttpClientModule }  from '@angular/common/http'
+@NgModule({
+  imports: [HttpClientModule],
+})
+* Ir al servicio (src\app\services\posts.service.ts)
+import { HttpClientModule } from '@angular/common/http';
+onstructor(private http: HttpClientModule) { }
 
 
