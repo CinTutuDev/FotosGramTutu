@@ -100,6 +100,14 @@ server.app.use((req, res, next) => {
   next();
 });
 ```
+* Otra solucion:
+```
+-Hacer npm install del cors
+-Hacer tsc para transpilar
+-Levantar app
+import  cors  from "cors";
+server.app.use(cors({origin:true, credentials: true}));
+```
 * Luego hacer en terminal dentro del back para transpilar en el dist/ todo (\ionic\BackendFotogramServe> ):
 ```
 tsc
