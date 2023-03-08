@@ -135,6 +135,23 @@ Enter
 Y nos crea la interfaces <br>
 Nota❗👀 tenemos que tener extensión JSON to TS
 
+## Crear modulo  ionic g m components
+ ```
+ ionic g m components
+```
+* Creo componente dentro de la carpeta components
+```
+ionic g c components/posts --spec=false
+```
+* Para importarlos y exportarlos en (src\app\components\components.module.ts):
+```
+import { PostComponent } from './post/post.component';
+import { PostsComponent } from './posts/posts.component';
+import { IonicModule } from '@ionic/angular';
 
-
-
+@NgModule({
+  declarations: [PostComponent, PostsComponent],
+  exports: [PostsComponent],
+  imports: [CommonModule, IonicModule],
+})
+```  
