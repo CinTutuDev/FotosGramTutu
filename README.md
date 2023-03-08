@@ -24,3 +24,68 @@ ionic start FotosgramTutu tabs
 	(✔para descargar los modulos: 'si archivo de prueba' )
 	ionic g page pages/login --spec=false
 ```
+## 🏍 Levantar app
+```
+ionic serve
+```
+## 🎮 Levantar mis servicios backend URL GitHub 
+ * URl
+```
+https://github.com/CinTutuDev/BackendFotogramServe
+```
+* Clone 
+```
+https://github.com/CinTutuDev/BackendFotogramServe.git
+```
+
+* Terminal 1ºLevantamos BD dentro del proyecto (\ionic\FotosgramTutu> mongod)
+```
+mongod
+```
+* Terminal 2º Vamos al backend/server (ionic\BackendFotogramServe>)
+<br>
+  ❗❗Si no tenemos la carpeta dist ejecutamos el comando:
+  
+  ```
+  tsc
+  ```
+   Nos creará el directorio dist/ qie es el producto de nuestra app. Y levantamos back :
+```
+nodemon dist/
+      ó
+node dist/
+```
+* 3º Ir a Postman y hacer una petición para confirmar que todo va bien:
+![comprobacionPost](https://user-images.githubusercontent.com/71487857/223683037-eae52992-e01d-4abf-913b-a4053b2c100f.png)
+
+## 🕹 En resumen para trabajar el la app:
+```
+ionic serve
+```
+```
+mongod
+```
+```
+nodemon dist
+```
+## Creo servicio para traerme todos los Posts que entran en Bakend 
+* Pruebo petición en Posman:
+
+![PeticionGETServer](https://user-images.githubusercontent.com/71487857/223685657-4d394899-38ff-452d-802b-107b1b548a01.png)
+* Creo el servicio
+```
+ionic g s services/posts --skip-tests
+```
+* Import de http (src\app\app.module.ts)
+```
+import { HttpClientModule }  from '@angular/common/http'
+@NgModule({
+  imports: [HttpClientModule],
+})
+```
+* Ir al servicio (src\app\services\posts.service.ts)👀Mirar que es httpClient 
+```
+import { HttpClient } from '@angular/common/http';
+onstructor(private http: HttpClient) { }
+```
+
