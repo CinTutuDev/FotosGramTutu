@@ -139,4 +139,16 @@ Nota❗👀 tenemos que tener extensión JSON to TS
  ```
  ionic g m components
 ```
+* Creo componente dentro de la carpeta components
+```
+ionic g c components/posts --spec=false
+```
+* Para importarlos y exportarlos en (src\app\components\components.module.ts):
+```
+import { PostComponent } from './post/post.component';
+import { PostsComponent } from './posts/posts.component';
 
+@NgModule({
+  declarations: [PostComponent, PostsComponent],
+  exports: [PostComponent, PostsComponent],
+```  
