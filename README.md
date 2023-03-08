@@ -38,7 +38,14 @@ https://github.com/CinTutuDev/BackendFotogramServe
 https://github.com/CinTutuDev/BackendFotogramServe.git
 ```
 
-
+* Terminal 1ºLevantamos BD dentro del proyecto (\ionic\FotosgramTutu> mongod)
+```
+mongod
+```
+* Terminal 2º Vamos al backend/server (ionic\BackendFotogramServe>)
+<br>
+ ❗❗Si no tenemos la carpeta dist ejecutamos el comando --> ```tsc```
+   Nos creará el directorio dist/ qie es el producto de nuestra app
 
 
 
