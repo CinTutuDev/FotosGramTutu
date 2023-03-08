@@ -44,7 +44,7 @@ mongod
 ```
 * Terminal 2º Vamos al backend/server (ionic\BackendFotogramServe>)
 <br>
- ❗❗Si no tenemos la carpeta dist ejecutamos el comando 
+  ❗❗Si no tenemos la carpeta dist ejecutamos el comando:
  ```
  tsc
  ```
