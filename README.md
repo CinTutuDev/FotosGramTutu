@@ -83,9 +83,9 @@ import { HttpClientModule }  from '@angular/common/http'
   imports: [HttpClientModule],
 })
 ```
-* Ir al servicio (src\app\services\posts.service.ts)
+* Ir al servicio (src\app\services\posts.service.ts)👀Mirar que es httpClient 
 ```
-import { HttpClientModule } from '@angular/common/http';
-onstructor(private http: HttpClientModule) { }
+import { HttpClient } from '@angular/common/http';
+onstructor(private http: HttpClient) { }
 ```
 
