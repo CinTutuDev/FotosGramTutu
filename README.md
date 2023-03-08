@@ -155,3 +155,11 @@ import { IonicModule } from '@ionic/angular';
   imports: [CommonModule, IonicModule],
 })
 ```  
+* Para usarlo ...ej(\src\app\pages\tab1\tab1.module.ts)
+``` 
+import { ComponentsModule } from 'src/app/components/components.module';
+@NgModule({
+  imports: [
+    ComponentsModule
+  ],
+
