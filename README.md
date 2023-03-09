@@ -161,4 +161,44 @@ import { ComponentsModule } from 'src/app/components/components.module';
   imports: [
     ComponentsModule
   ],
+```
+## Css para slides aporte del curso de Frenando Herrera súper útil
+
+* En el css (src\app\components\post\post.component.scss)
+```
+.post {
+ margin-top: 10px;
+ 
+ -webkit-box-shadow: 0 2px 10px -5px rgba(0,0,0,0.5);
+ box-shadow: 0 2px 10px -5px rgba(0,0,0,0.5);
+}
+
+.image-slide {
+ width: 100%;
+ height: 250px;
+
+ // background-color: red;
+
+ /* Full height */
+ // height: 100%; 
+
+ /* Imagen centrada y colocada de forma elegante */
+ background-position: center;
+ background-repeat: no-repeat;
+ background-size: cover;
+}
+```
+* En el html (src\app\components\post\post.component.html)
+```
+<ion-slides mode="ios" pager="ios" scrollbar="ios" pager="true">
+    <ion-slide class="image-slide">
+      <ion-img src="assets/1.png"></ion-img>
+    </ion-slide>
+  </ion-slides>
+```
+
+
+
+
+
 
