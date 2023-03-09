@@ -162,6 +162,15 @@ import { ComponentsModule } from 'src/app/components/components.module';
     ComponentsModule
   ],
 ```
+## Crear modulo pipes
+```
+ionic g m pipes
+```
+* Para crear dentro de pipes un pipe
+```
+ ionic g pipe pipes/domSanitazer
+```
+
 ## Css para slides aporte del curso de Frenando Herrera súper útil
 
 * En el css (src\app\components\post\post.component.scss)
