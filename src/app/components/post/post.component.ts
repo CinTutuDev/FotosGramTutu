@@ -9,8 +9,8 @@ import { Post } from 'src/app/interfaces/interfaces';
 export class PostComponent implements OnInit {
 
   @Input() post: Post | any = {};
-
-  img3 = 'assets/3.png';
+  
+  img1  = 'assets/3.png';
 
   constructor() {}
 

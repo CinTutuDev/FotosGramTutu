@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DomSanitazerPipe } from './dom-sanitazer.pipe';
+import { DomSanitizerPipe } from './dom-sanitazer.pipe';
 
 @NgModule({
-  declarations: [DomSanitazerPipe],
-  exports: [DomSanitazerPipe],
+  declarations: [DomSanitizerPipe],
+  exports: [DomSanitizerPipe],
 })
 export class PipesModule {}

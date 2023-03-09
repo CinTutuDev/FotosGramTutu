@@ -11,9 +11,7 @@
   </ion-item>
 
   <ion-slides mode="ios" pager="ios" scrollbar="ios" pager="true">
-    <ion-slide
-      class="image-slide"
-      style="background-image: url('{{img3}}')">
+    <ion-slide class="image-slide" [style]=" img1 | domSanitazer ">
     </ion-slide>
     <ion-slide
     class="image-slide"
