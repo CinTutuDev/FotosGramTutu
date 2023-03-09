@@ -22,11 +22,16 @@
 </ion-header>
 
 <ion-content class="fondo">
+<!-- ----------------------------- refresher---------------------------------------->
+  <ion-refresher slot="fixed" (ionRefresh)="recargar($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+<!-- ---------------------------------------post---------------------------------->
   <!-- "posts" hace ref a tab1.page.ts  -->
   <!--  [posts] hace ref components\posts\posts.component.ts -->
   <app-posts [posts]="posts" class="fondo"></app-posts>
-
-  <ion-infinite-scroll threshold="150px" (ionInfinite)="siguiente($event)">
+<!-- --------------------------------------infinite-scroll-------------------------- -->
+  <ion-infinite-scroll  [disabled]="!habilitado" threshold="150px" (ionInfinite)="siguiente($event)">
     <div class="infinite-scroll-content">
       <svg
         version="1.1"
