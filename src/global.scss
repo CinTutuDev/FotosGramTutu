@@ -24,3 +24,27 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+
+.poster {
+ width: 110px !important;
+ height: 160px !important;
+}
+.imgLogo {
+ width: 50%;
+ display: block;
+ margin: 0px auto;
+}
+.tituloLabel {
+ font-size: xx-large !important;
+}
+.tituloLabelh4{
+ font-size: x-large !important;
+}
+.borde {
+ --border-style: none;
+}
+.fondo{
+ background-color: black;
+}

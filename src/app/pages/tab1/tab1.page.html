@@ -1,25 +1,28 @@
 <ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button >
-        <ion-icon slot="icon-only" name="bonfire"></ion-icon>
-       
+      <ion-button>
+        <ion-icon slot="icon-only" name="bonfire" color="danger"></ion-icon>
       </ion-button>
     </ion-buttons>
 
-
-    <ion-title><!-- D:\ionic\FotosgramTutu\src\assets\fgtb.gif -->
-      <ion-img src="assets\banner2.png" class="align-text-center"></ion-img>
-      <!-- <ion-card>
-        <ion-img [src]="i. backdrop_path | imagen"></ion-img>
-     </ion-card> -->
-    </ion-title>
+    <ion-grid fixed no-border>
+      <ion-row>
+        <ion-col>
+          <ion-item class="ion-text-center borde">
+            <ion-img
+              src="/assets/2.png"
+              class="ion-text-center imgLogo"
+            ></ion-img>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-toolbar>
 </ion-header>
 
-<ion-content color="light">
-
-<!-- "posts" hace ref a tab1.page.ts  -->
-<!--  [posts] hace ref components\posts\posts.component.ts -->
-<app-posts [posts]="posts"></app-posts>
+<ion-content class="fondo">
+  <!-- "posts" hace ref a tab1.page.ts  -->
+  <!--  [posts] hace ref components\posts\posts.component.ts -->
+  <app-posts [posts]="posts" class="fondo"></app-posts>
 </ion-content>

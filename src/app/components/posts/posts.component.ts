@@ -12,7 +12,7 @@ export class PostsComponent  implements OnInit {
   constructor() { }
 
   ngOnInit() { 
-    console.log(this.posts);
+    console.log('Los posts son: ', this.posts.length);
   }
 
 }
