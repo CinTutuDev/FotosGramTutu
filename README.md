@@ -1,8 +1,7 @@
- 
- # <p align="center">![FotosGramTutusICO1](https://user-images.githubusercontent.com/71487857/223461421-508ab027-8d98-4b14-9e19-266dd5092287.png) App para IOS, Android, Chrome.</p> 
+ # <p align="center"> ![150px](https://user-images.githubusercontent.com/71487857/223967883-f382f0f3-e3cf-49c8-a99e-3484fac81a52.png)  App para IOS, Android, Chrome.</p> 
  # <p align="center"> Proyecto realizado con ![angular](https://user-images.githubusercontent.com/71487857/212993270-3cf1454e-f0d7-4164-bc01-20d5fe6469cd.png)Angular/![descarga](https://user-images.githubusercontent.com/71487857/212993697-6234ef26-0e4a-40ce-bc8a-a9bfa858a74b.png)Ionic</p> 
  
-<img src="https://readme-typing-svg.demolab.com?font=Libre+Baskerville&size=40&duration=3100&pause=500&color=ff3d5c&center=true&vCenter=true&width=940&lines=FotosgramTutu" align="middle" alt="fotosgram" width="100%"/>
+<img src="https://readme-typing-svg.demolab.com?font=Libre+Baskerville&size=40&duration=3100&pause=500&color=ff3d5c&center=true&vCenter=true&width=940&lines=FotosGramTutu" align="middle" alt="fotosgram" width="100%"/>
  
 
 ## Creo el proyecto con tabs:
