@@ -187,7 +187,7 @@ import { ComponentsModule } from 'src/app/components/components.module';
  background-repeat: no-repeat;
  background-size: cover;
 }
-´´´
+```
 * En el html (src\app\components\post\post.component.html)
 ```
 <ion-slides mode="ios" pager="ios" scrollbar="ios" pager="true">
