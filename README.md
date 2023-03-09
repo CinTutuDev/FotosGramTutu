@@ -170,7 +170,29 @@ ionic g m pipes
 ```
  ionic g pipe pipes/domSanitazer
 ```
-
+* Su uso
+ * En (src\app\pipes\dom-sanitazer.pipe.ts):
+ ```
+  import { DomSanitizer } from '@angular/platform-browser';
+  constructor(private domSanitazer: DomSanitizer){}
+  transform( img: string ): any{
+    const domImg = `background-image: url('${img}')`;
+    return this.domSanitazer.bypassSecurityTrustStyle( domImg );
+  }
+ ```
+ * Luego en (src\app\pipes\pipes.module.ts) tenemos que exportarlo
+  ```
+  import { DomSanitazerPipe } from './dom-sanitazer.pipe';
+@NgModule({
+  declarations: [DomSanitazerPipe],
+  exports: [DomSanitazerPipe],
+})
+```
+ * Y luego importarlo en (src\app\components\components.module.ts) para su uso en cualquier componente
+   ```
+   import { PipesModule } from '../pipes/pipes.module';
+   imports: [CommonModule, IonicModule, PipesModule],
+   ```
 ## Css para slides aporte del curso de Frenando Herrera súper útil
 
 * En el css (src\app\components\post\post.component.scss)
