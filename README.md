@@ -172,7 +172,7 @@ ionic g m pipes
 ```
 * Su uso
  * En (src\app\pipes\dom-sanitazer.pipe.ts):
-  ```
+ ```
   import { DomSanitizer } from '@angular/platform-browser';
   constructor(private domSanitazer: DomSanitizer){}
   transform( img: string ): any{
@@ -181,13 +181,13 @@ ionic g m pipes
   }
  ```
  * Luego en (src\app\pipes\pipes.module.ts) tenemos que exportarlo
-  ´´´
+  ```
   import { DomSanitazerPipe } from './dom-sanitazer.pipe';
 @NgModule({
   declarations: [DomSanitazerPipe],
   exports: [DomSanitazerPipe],
 })
-``` 
+```
  * Y luego importarlo en (src\app\components\components.module.ts) para su uso en cualquier componente
    ```
    import { PipesModule } from '../pipes/pipes.module';
