@@ -1,6 +1,6 @@
 <ion-content>
   <!-- -------------------------------------------------------slides principal----------------------------- -->
-  <ion-slides class="mainSlide" #slidePrincipal [options]="slideSoloOpts">
+  <ion-slides class="mainSlide" #slidePrincipal >
     <ion-slide>
       <form (ngSubmit)="loginUser(fLogin)" #fLogin="ngForm">
         <ion-grid fixed>
@@ -115,6 +115,7 @@
           size="small"
           fill="outline"
           color="tertiary"
+          (click)="mostrarRegistro()"
         >
           Ingresar
         </button>
@@ -128,6 +129,7 @@
           size="small"
           fill="outline"
           color="tertiary"
+          (click)="mostrarLogin()"
         >
           Registrarme
         </button>

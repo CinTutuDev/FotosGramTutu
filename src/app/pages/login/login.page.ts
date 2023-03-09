@@ -8,10 +8,7 @@ import { IonSlides } from '@ionic/angular';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  slideSoloOpts = {
-    allowSlideNext: false,
-    allowSlidePrev: false
-  };
+  @ViewChild('slidePrincipal', {static: true}) slides: IonSlides | any;
   avatares = [
     {
       img: 'av-1.png',
@@ -70,7 +67,7 @@ export class LoginPage implements OnInit {
   constructor() {}
 
   ngOnInit() {
-/*     this.slides?.lockSwipes(true) */
+    this.slides?.lockSwipes(true)
   }
 
   loginUser(fLogin: NgForm) {
@@ -84,5 +81,17 @@ export class LoginPage implements OnInit {
   seleccionarAvatar(avatar: any) {
     this.avatares.forEach((av) => (av.seleccionado = false));
     avatar.seleccionado = true;
+  }
+
+  mostrarRegistro(){
+    this.slides.lockSwipes(false);
+    this.slides.slideTo(0);
+    this.slides.lockSwipes(true);
+  }
+
+  mostrarLogin(){
+    this.slides.lockSwipes(false);
+    this.slides.slideTo(1);
+    this.slides.lockSwipes(true);
   }
 }
