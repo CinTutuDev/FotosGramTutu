@@ -1,26 +1,28 @@
 <div class="post">
   <ion-item lines="none">
-
     <ion-avatar slot="start">
       <!-- <img src="/assets/avatars/{{ post.usuario.avatar }}"> -->
-      <img src="assets/avatares/{{post.usuario.avatar}}" alt="">
+      <img src="assets/avatares/{{ post.usuario.avatar }}" alt="" />
     </ion-avatar>
     <ion-label>
-      <h3>{{post.usuario.nombre}}</h3>
-      <h5>{{post.usuario.email}}</h5>
+      <h3>{{ post.usuario.nombre }}</h3>
+      <h5>{{ post.usuario.email }}</h5>
     </ion-label>
   </ion-item>
 
   <ion-slides mode="ios" pager="ios" scrollbar="ios" pager="true">
-    <ion-slide>
-      <ion-img src="assets/1.png"></ion-img>
+    <ion-slide
+      class="image-slide"
+      style="background-image: url('{{img3}}')">
     </ion-slide>
-    <ion-slide>
-      <ion-img src="assets/2.png"></ion-img>
-    </ion-slide>
-    <ion-slide>
-      <ion-img src="assets/3.png"></ion-img>
-    </ion-slide>
+    <ion-slide
+    class="image-slide"
+    style="background-image: url('assets/2.png')">
+  </ion-slide>
+  <ion-slide
+  class="image-slide"
+  style="background-image: url('assets/3.png')">
+</ion-slide>
   </ion-slides>
 
   <ion-item lines="none">
@@ -30,10 +32,7 @@
 
   <ion-item lines="none">
     <ion-label text-wrap>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores voluptas
-      perspiciatis saepe provident laudantium iusto impedit exercitationem quam
-      enim incidunt. Ipsam fuga quisquam ducimus quae iusto minus, dicta quis
-      consequuntur.
+      {{ post.mensaje }}
     </ion-label>
   </ion-item>
 </div>

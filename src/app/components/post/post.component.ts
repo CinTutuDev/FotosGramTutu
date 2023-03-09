@@ -7,7 +7,10 @@ import { Post } from 'src/app/interfaces/interfaces';
   styleUrls: ['./post.component.scss'],
 })
 export class PostComponent implements OnInit {
-  @Input() post: Post | any= {};
+
+  @Input() post: Post | any = {};
+
+  img3 = 'assets/3.png';
 
   constructor() {}
 
