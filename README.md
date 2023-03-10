@@ -255,36 +255,13 @@ export class AppModule { }
 
 *Creo un servicio:
 
-ionic g s services/storage --skip-tests
+ inic g s services/usuario --skip-tests
 
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 
-@Injectable({
-  providedIn: 'root',
-})
-
-export class StorageService {
-  private _storage: Storage | null = null;
-  pelis: DetallePelis[] = [];
-
-  constructor(private storage: Storage) {
-    this.initDB();
-  }
-
-  async initDB() {
-    const storage = await this.storage.create();
-    this._storage = storage;
-  }
-
-  /* llamo a la interface para guardar peli */
-  getGuardoPeli(peli: DetallePelis) {
-    this.pelis.push(peli);
-    /* guardamos en el array pelis  y grabamos/guardamos en el storage */
-    this.storage.set('peliculas', this.pelis);
-    console.log(this.pelis);
-  }
-
+constructor(private http: HttpClient, private storage: Storage) {  }
 
 *Inyectamos el servicio
 src\app\components\detalle-peli\detalle-peli.component.ts
