@@ -228,7 +228,49 @@ ionic g m pipes
   </ion-slides>
 ```
 
+## ![descarga](https://user-images.githubusercontent.com/71487857/214578135-16d1a768-8961-4099-82ce-43045983b5f6.png)@ionic/storage
 
+```
+*Dar funcionalidad al btn de favoritos guardando y mostrando con storage
+
+ URL
+ https://github.com/ionic-team/ionic-storage
+
+ *Instalación
+ npm install @ionic/storage
+
+ *Instalar biblioteca Angular
+ npm install @ionic/storage-angular
+
+ *Como es un módulo va en los imports:
+ import { IonicStorageModule } from '@ionic/storage-angular';
+
+@NgModule({
+  imports: [
+    IonicStorageModule.forRoot(),
+    OJO ❗❗ si sale error reiniciar code❗❗ 
+  ]
+})
+export class AppModule { }
+
+*Creo un servicio:
+
+ inic g s services/usuario --skip-tests
+
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage-angular';
+
+constructor(private http: HttpClient, private storage: Storage) {  }
+
+*Inyectamos el servicio
+src\app\components\detalle-peli\detalle-peli.component.ts
+
+import { StorageService } from './../../services/storage.service';
+ favoritos() {
+    this.storageServide.getGuardoPeli(this.peli)
+  }
+```
 
 
 
