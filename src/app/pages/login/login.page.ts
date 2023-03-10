@@ -78,7 +78,13 @@ export class LoginPage implements OnInit {
   }
 
   loginUser(fLogin: NgForm) {
+
+    if(fLogin.invalid){return;}
+
+    this.usuarioService.login(this.loginUsuario.email, this.loginUsuario.password)
+
     console.log(fLogin.valid);
+    console.log(this.loginUsuario);
   }
 
   crearUser(fCrear: NgForm) {
