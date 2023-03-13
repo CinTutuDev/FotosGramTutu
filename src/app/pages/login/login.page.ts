@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { IonSlides, NavController } from '@ionic/angular';
+import { UiServiceService } from 'src/app/services/ui-service.service';
 import { UsuarioService } from '../../services/usuario.service';
 
 @Component({
@@ -72,7 +73,8 @@ export class LoginPage implements OnInit {
   }
 
   constructor(private usuarioService: UsuarioService,
-              private navCtrl: NavController ) {}
+              private navCtrl: NavController,
+              private uiService: UiServiceService ) {}
 
   ngOnInit() {
     this.slides?.lockSwipes(true)
@@ -86,12 +88,13 @@ export class LoginPage implements OnInit {
 
    /* Si es valido el login ves a esta ruta ...main */
    /*  */
-   if(valido){  this.navCtrl.navigateRoot('/main/tabs/tab1'), { animated: true} }
-
-   else{  }
-
-    console.log(fLogin.valid);
-    console.log(this.loginUsuario);
+   if ( valido ) {
+    // navegar al tabs
+    this.navCtrl.navigateRoot( '/main/tabs/tab1', { animated: true } );
+  } else {
+    // mostrar alerta de usuario y contraseña no correctos
+    this.uiService.alertInfo('Usuario y contraseña no son correctos.');
+  }
   }
 
   crearUser(fCrear: NgForm) {
