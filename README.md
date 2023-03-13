@@ -261,7 +261,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 
-constructor(private http: HttpClient, private storage: Storage) {  }
+constructor(private http: HttpClient, private storage: Storage) { 
+ OJO ❗❗  declarar el token:
+  token: string | null = null;
+}
 
 *Inyectamos el servicio
 src\app\components\detalle-peli\detalle-peli.component.ts
