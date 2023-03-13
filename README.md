@@ -67,7 +67,7 @@ mongod
 ```
 nodemon dist
 ```
-## Creo servicio para traerme todos los Posts que entran en Bakend 
+## 📌 Creo servicio para traerme todos los Posts que entran en Bakend 
 * Pruebo petición en Posman:
 
 ![PeticionGETServer](https://user-images.githubusercontent.com/71487857/223685657-4d394899-38ff-452d-802b-107b1b548a01.png)
@@ -113,7 +113,7 @@ tsc
 ```
 * Volver a lentar todo
 
-## Para crear JSON:
+## 📌 Para crear JSON:
 * 1º Ir al Postaman y hacer peticion GET de pg y copiar toda la respuesta del body
 ![PeticionGETServer](https://user-images.githubusercontent.com/71487857/223685657-4d394899-38ff-452d-802b-107b1b548a01.png)
 * 2º copiar del body: ctrl +a +c
@@ -134,7 +134,7 @@ Enter
 Y nos crea la interfaces <br>
 Nota❗👀 tenemos que tener extensión JSON to TS
 
-## Crear modulo  ionic g m components
+## 📌 Crear modulo  ionic g m components
  ```
  ionic g m components
 ```
@@ -162,7 +162,7 @@ import { ComponentsModule } from 'src/app/components/components.module';
     ComponentsModule
   ],
 ```
-## Crear modulo pipes
+## 📌 Crear modulo pipes
 ```
 ionic g m pipes
 ```
@@ -193,6 +193,15 @@ ionic g m pipes
    import { PipesModule } from '../pipes/pipes.module';
    imports: [CommonModule, IonicModule, PipesModule],
    ```
+
+## 📌 Crear guard 
+* Se crea principalmente para proteger las rutas
+```
+ ionic g guard guards/usuario --skip-tests
+ ? Which type of guard would you like to create? CanActivate
+```
+   
+
 ## Css para slides aporte del curso de Frenando Herrera súper útil
 
 * En el css (src\app\components\post\post.component.scss)
