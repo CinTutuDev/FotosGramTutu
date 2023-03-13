@@ -17,7 +17,7 @@ export class UsuarioService {
     this._storage.create();
   }
 
-  login(email: string, password: string)/* : any */ {
+  login(email: string, password: string) /* : any */ {
     const data = { email, password };
 
     return new Promise((resolve) => {

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { IonSlides } from '@ionic/angular';
+import { IonSlides, NavController } from '@ionic/angular';
 import { UsuarioService } from '../../services/usuario.service';
 
 @Component({
@@ -71,17 +71,24 @@ export class LoginPage implements OnInit {
 
   }
 
-  constructor(private usuarioService: UsuarioService) {}
+  constructor(private usuarioService: UsuarioService,
+              private navCtrl: NavController ) {}
 
   ngOnInit() {
     this.slides?.lockSwipes(true)
   }
 
-  loginUser(fLogin: NgForm) {
+  async loginUser(fLogin: NgForm) {
 
     if(fLogin.invalid){return;}
 
-    this.usuarioService.login(this.loginUsuario.email, this.loginUsuario.password)
+   const valido = await this.usuarioService.login(this.loginUsuario.email, this.loginUsuario.password)
+
+   /* Si es valido el login ves a esta ruta ...main */
+   /*  */
+   if(valido){  this.navCtrl.navigateRoot('/main/tabs/tab1'), { animated: true} }
+
+   else{  }
 
     console.log(fLogin.valid);
     console.log(this.loginUsuario);
