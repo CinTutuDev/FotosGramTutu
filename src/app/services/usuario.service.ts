@@ -12,14 +12,18 @@ const URL = environment.url;
   providedIn: 'root',
 })
 export class UsuarioService {
-   private _storage: Storage | null = null;
+  private _storage: Storage | null = null;
   /* token = null; */
   /*  token  = null */
-  token!: string | null ;
-
+  /*   token: string | null = null; */
+  token = null;
   usuario: Usuario = {};
 
-  constructor(private http: HttpClient, private storage: Storage,  private navCtrl: NavController ) {
+  constructor(
+    private http: HttpClient,
+    private storage: Storage,
+    private navCtrl: NavController
+  ) {
     this.init();
   }
 
@@ -30,9 +34,7 @@ export class UsuarioService {
   }
   public set(key: string, value: any) {
     this._storage?.set(key, value);
-  
-    
-}
+  }
 
   /* ------------------------------------------------------LOGIN-------------------------------------- */
   login(email: string, password: string) /* : any */ {
@@ -81,49 +83,37 @@ export class UsuarioService {
   }
 
   async guardarToken(token: string) {
-    this.token = token;
+    /* this.token = token; */
     await this.storage.set('token', token);
   }
 
   async cargarToken() {
-
-    this.token = await this.storage.get('token') || null;
-
+    this.token = (await this.storage.get('token')) || null;
   }
 
- async validaToken(): Promise<boolean>{
-
+  async validaToken(): Promise<boolean> {
     await this.cargarToken();
-
-    if ( !this.token ) {
+    /* Si no existe token lo sacamos del storage ...resolvemos un falso lo sacamos
+    lo mandamos al login  */
+    if (!this.token) {
       this.navCtrl.navigateRoot('/login');
       return Promise.resolve(false);
     }
 
-
-    return new Promise<boolean>( resolve => {
-
+    return new Promise<boolean>((resolve) => {
       const headers = new HttpHeaders({
-       'x-token': this.token /* = JSON.parse(localStorage.getItem('token') as string) */
+        'x-token': this.token!,
       });
-      
 
-      this.http.get(`${ URL }/user/`, { headers })
-      .subscribe( (resp: any) => {
-
-        if ( resp['ok'] ) {
+      this.http.get(`${URL}/user/`, { headers }).subscribe((resp: any) => {
+        if (resp['ok']) {
           this.usuario = resp['usuario'];
           resolve(true);
         } else {
           this.navCtrl.navigateRoot('/login');
           resolve(false);
         }
-
       });
-
-
-  });
-
+    });
   }
-
 }
