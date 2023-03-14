@@ -17,7 +17,8 @@ export class UsuarioService {
   /*  token  = null */
   /*   token: string | null = null; */
   token = null;
-  usuario: Usuario = {};
+  /* private para evitar ser leido e fuera */
+  private usuario: Usuario = {};
 
   constructor(
     private http: HttpClient,
@@ -80,6 +81,15 @@ export class UsuarioService {
         }
       });
     });
+  }
+
+  getUusario() {
+
+    if(!this.usuario){
+      this.validaToken();
+    }
+
+    return { ...this.usuario };
   }
 
   async guardarToken(token: string) {

@@ -16,7 +16,7 @@
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
-@import '~@ionic/angular/css/display.css';
+@import "~@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "~@ionic/angular/css/padding.css";
@@ -25,26 +25,54 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
-
-
 .poster {
- width: 110px !important;
- height: 160px !important;
+  width: 110px !important;
+  height: 160px !important;
 }
 .imgLogo {
- width: 50%;
- display: block;
- margin: 0px auto;
+  width: 50%;
+  display: block;
+  margin: 0px auto;
 }
 .tituloLabel {
- font-size: xx-large !important;
+  font-size: xx-large !important;
 }
-.tituloLabelh4{
- font-size: x-large !important;
+.tituloLabelh4 {
+  font-size: x-large !important;
 }
 .borde {
- --border-style: none;
+  --border-style: none;
 }
-.fondo{
- background-color: black;
+.fondo {
+  background-color: black;
+}
+.btn {
+  padding: 17px 40px;
+  border-radius: 10px;
+  border: 0;
+  background-color: rgb(255, 56, 86);
+  letter-spacing: 1.5px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  box-shadow: rgb(201, 46, 70) 0px 10px 0px 0px;
+  color: hsl(0, 0%, 100%);
+}
+
+.btn:hover {
+  box-shadow: rgb(201, 46, 70) 0px 7px 0px 0px;
+}
+
+.btn:active {
+  background-color: rgb(255, 56, 86);
+  /*50, 168, 80*/
+  box-shadow: rgb(201, 46, 70) 0px 0px 0px 0px;
+  transform: translateY(5px);
+  transition: 200ms;
+}
+.img-avatar {
+  width: 150px;
+}
+
+.top-20 {
+  margin-top: 20px;
 }
