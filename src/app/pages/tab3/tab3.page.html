@@ -22,8 +22,8 @@
       </ion-label>
     </ion-col>
   </ion-row>
-
-  <app-avatar-selec></app-avatar-selec>
+<!--  (avatarSel)="user.avatar = $event" -->
+  <app-avatar-selec [(avatarActual)]="user.avatar"></app-avatar-selec>
 
   <form (ngSubmit)="actualizar( fActualizar )" #fActualizar="ngForm">
     <ion-row>

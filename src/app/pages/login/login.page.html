@@ -48,7 +48,7 @@
       <ion-grid fixed>
        
         <!------------------------------------------------ Avatr sectertor  ------------------------->
-        <app-avatar-selec (avatarSel)="registerUser.avatar = $event"></app-avatar-selec>
+        <app-avatar-selec [(avatarActual)]="registerUser.avatar"></app-avatar-selec>
 
         <!-- -------------------------------------------------------Crear usuario -------------------------------------->
         <form (ngSubmit)="crearUser(fLogin)" #fLogin="ngForm">

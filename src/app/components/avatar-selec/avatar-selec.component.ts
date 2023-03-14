@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-
+import { UsuarioService } from '../../services/usuario.service';
 
 @Component({
   selector: 'app-avatar-selec',
@@ -7,9 +7,9 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./avatar-selec.component.scss'],
 })
 export class AvatarSelecComponent implements OnInit {
+  @Output() avatarActualChange  = new EventEmitter<string>();
 
-  @Output() avatarSel =new EventEmitter<string>();
-
+  @Input() avatarActual: string | undefined;
   avatares = [
     {
       img: 'av-1.png',
@@ -65,15 +65,25 @@ export class AvatarSelecComponent implements OnInit {
     slidesPerView: 3.5,
   };
 
-  constructor() {}
+  constructor(private userService:UsuarioService ) {}
 
-  ngOnInit() {}
+  async ngOnInit() {
+    this.avatarActual = (await this.userService.getUusario()).avatar;
+    this.avatares.forEach(avatar => avatar.seleccionado = false);
+    for (const avatar of this.avatares) {
+      if (avatar.img === this.avatarActual) {
+        avatar.seleccionado = true;
+        break;
+      }
+    }
+  }
 
   seleccionarAvatar(avatar: any) {
     this.avatares.forEach((av) => (av.seleccionado = false));
-    avatar.seleccionado = true;
 
+    avatar.seleccionado = true;
     console.log(avatar.img);
-    this.avatarSel.emit(avatar.img)
+    this.avatarActual = avatar.img;
+    this.avatarActualChange.emit(this.avatarActual);
   }
 }
