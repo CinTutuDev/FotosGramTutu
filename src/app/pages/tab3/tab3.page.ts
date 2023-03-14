@@ -1,6 +1,8 @@
 import { Usuario } from './../../interfaces/interfaces';
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from '../../services/usuario.service';
+import { NgForm } from '@angular/forms';
+import { UiServiceService } from '../../services/ui-service.service';
 
 @Component({
   selector: 'app-tab3',
@@ -11,12 +13,29 @@ export class Tab3Page implements OnInit {
   /* private para evitar ser leido e fuera */
   user: Usuario = {};
 
-  constructor(private usuarioService: UsuarioService) {}
+  constructor(private usuarioService: UsuarioService, private uiServide: UiServiceService) {}
 
   ngOnInit() {
 
     this.user = this.usuarioService.getUusario();
     console.log(this.user);
+  }
+
+
+  
+  async actualizar( fActualizar: NgForm ) {
+
+    if ( fActualizar.invalid ) { return; }
+
+    const actualizado = await this.usuarioService.actulizarUser( this.user );
+    if ( actualizado ) {
+      // toast con el mensaje de actualizado
+      this.uiServide.presentToast('middle', 'Registro actualizado' );
+    } else {
+      // toast con el error
+      this.uiServide.presentToast('middle', 'No se pudo actualizar' );
+    }
+
   }
 
   logout() {}

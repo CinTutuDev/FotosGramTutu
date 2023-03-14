@@ -84,16 +84,15 @@ export class UsuarioService {
   }
 
   getUusario() {
-
-    if(!this.usuario){
+    if (!this.usuario) {
       this.validaToken();
     }
 
     return { ...this.usuario };
   }
 
-  async guardarToken(token: string) {
-    /* this.token = token; */
+  async guardarToken(token: any) {
+    this.token = token;
     await this.storage.set('token', token);
   }
 
@@ -114,6 +113,7 @@ export class UsuarioService {
       const headers = new HttpHeaders({
         'x-token': this.token!,
       });
+      
 
       this.http.get(`${URL}/user/`, { headers }).subscribe((resp: any) => {
         if (resp['ok']) {
@@ -124,6 +124,32 @@ export class UsuarioService {
           resolve(false);
         }
       });
+    });
+  }
+
+  /* -----------------------------------------------------ACTUALIZAR USER-------------------------------------------- */
+
+  actulizarUser(user: Usuario) {
+    const headers = new HttpHeaders({
+      'x-token': this.token!,
+    });
+
+    console.log('user', user);
+
+    return new Promise<boolean>((resolve) => {
+      this.http
+        .post(`${URL}/user/update`, user, { headers })
+        .subscribe((resp: any) => {
+
+          console.log(resp);
+
+          if (resp['ok']) {
+            this.guardarToken(resp['token']);
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        });
     });
   }
 }

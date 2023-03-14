@@ -25,18 +25,28 @@
 
   <app-avatar-selec></app-avatar-selec>
 
-  <form>
+  <form (ngSubmit)="actualizar( fActualizar )" #fActualizar="ngForm">
     <ion-row>
       <ion-col>
         <ion-list>
           <ion-item>
             <ion-label>Email</ion-label>
-            <ion-input name="email" type="email" [(ngModel)]="user.email"  required></ion-input>
+            <ion-input
+              name="email"
+              type="email"
+              [(ngModel)]="user.email"
+              required
+            ></ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label>Nombre</ion-label>
-            <ion-input name="nombre" type="text" [(ngModel)]="user.nombre" required></ion-input>
+            <ion-input
+              name="nombre"
+              type="text"
+              [(ngModel)]="user.nombre"
+              required
+            ></ion-input>
           </ion-item>
         </ion-list>
       </ion-col>
