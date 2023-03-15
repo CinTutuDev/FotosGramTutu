@@ -6,7 +6,7 @@
       <!-- si el post es menor q 1 desabilito sy se escibe 1 ó + palabras habilito -->
       <ion-button
         (click)="crearPost()"
-        [disabled]="post.mansaje.length < 1 "
+        [disabled]="post.mensaje.length < 1 "
         class="btn-font"
       >
         Compartir
@@ -19,7 +19,7 @@
   <ion-list>
     <ion-item>
       <ion-label position="floating">Mensaje</ion-label>
-      <ion-textarea [(ngModel)]="post.mansaje"></ion-textarea>
+      <ion-textarea [(ngModel)]="post.mensaje"></ion-textarea>
     </ion-item>
 
     <ion-list>
