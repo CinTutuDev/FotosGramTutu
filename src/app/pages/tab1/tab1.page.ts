@@ -17,7 +17,9 @@ export class Tab1Page implements OnInit {
 
   ngOnInit(): void {
     this.siguiente();
-    /*     throw new Error('Method not implemented.'); */
+    this.postsService.nuevoPost.subscribe(post =>{
+        this.posts.unshift(post)
+    })
   }
 
   recargar(event?: any) {
