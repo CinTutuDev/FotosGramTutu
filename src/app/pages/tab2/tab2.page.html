@@ -3,7 +3,14 @@
     <ion-title> Nuevo Post </ion-title>
 
     <ion-buttons slot="end">
-      <ion-button (click)="crearPost()" color="primary"> Compartir </ion-button>
+      <!-- si el post es menor q 1 desabilito sy se escibe 1 ó + palabras habilito -->
+      <ion-button
+        (click)="crearPost()"
+        [disabled]="post.mansaje.length < 1 "
+        class="btn-font"
+      >
+        Compartir
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -12,7 +19,7 @@
   <ion-list>
     <ion-item>
       <ion-label position="floating">Mensaje</ion-label>
-      <ion-textarea></ion-textarea>
+      <ion-textarea [(ngModel)]="post.mansaje"></ion-textarea>
     </ion-item>
 
     <ion-list>
@@ -42,7 +49,7 @@
   <ion-row>
     <ion-col size="3" *ngFor="let image of tempImages">
       <ion-card>
-        <img src="">
+        <img src="" />
       </ion-card>
     </ion-col>
   </ion-row>
