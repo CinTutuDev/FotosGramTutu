@@ -283,6 +283,49 @@ import { StorageService } from './../../services/storage.service';
     this.storageServide.getGuardoPeli(this.peli)
   }
 ```
+## 🌍 Geo localización
+### URL 
+```
+https://ionicframework.com/docs/native/geolocation
+```
+* Istalación
+```
+npm install cordova-plugin-geolocation
+npm install @awesome-cordova-plugins/geolocation
+npx cap sync
+```
+* Ir a \app\app.module.ts
+```
+import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
+providers: [Geolocation,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+❗❗ si sale error solo hay que reiniciar en VC
+```
+* Codigo
+```
+this.geoLocation.getCurrentPosition().then((resp)=>{
+
+      this.cargandoGeo = false;
+
+    }).catch((error)=>{
+      console.log('Error de coger localización', error);
+      this.cargandoGeo = false;
+
+    })
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
