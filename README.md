@@ -312,10 +312,19 @@ this.geoLocation.getCurrentPosition().then((resp)=>{
 
     })
 ```
+* Añadir al config.xml
 
+```
+URL
+https://github.com/apache/cordova-plugin-geolocation
 
-
-
+```
+```
+Codigo
+<edit-config target="NSLocationWhenInUseUsageDescription" file="*-Info.plist" mode="merge">
+    <string>Necesito tu autoricación para saber tu ubicación</string>
+</edit-config>
+```
 
 
 
