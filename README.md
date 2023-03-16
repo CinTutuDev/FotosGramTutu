@@ -326,7 +326,15 @@ Codigo
 </edit-config>
 ```
 
-## 🗺 🗺🗺🗺
+## 🗺 Map --> account.mapbox.com/
+
+* Registrarse
+* Luego ir a (https://docs.mapbox.com/mapbox-gl-js/guides/install/) y copiar el CDN y pegarlo en index.html antes del cierre del </head>:
+ ```
+ <script src='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css' rel='stylesheet' />
+```
+
 
 
 
