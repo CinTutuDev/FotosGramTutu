@@ -10,7 +10,7 @@
     </ion-label>
   </ion-item>
 
-  <ion-slides mode="ios" pager="ios" scrollbar="ios" pager="true">
+  <!-- <ion-slides mode="ios" pager="ios" scrollbar="ios" pager="true">
     <ion-slide class="image-slide" [style]=" img1 | domSanitazer ">
     </ion-slide>
     <ion-slide
@@ -21,7 +21,9 @@
   class="image-slide"
   style="background-image: url('assets/3.png')">
 </ion-slide>
-  </ion-slides>
+  </ion-slides> -->
+
+  <app-mapa [coords]="post.coords" ></app-mapa>
 
   <ion-item lines="none">
     <ion-icon slot="start" name="heart-outline" color="danger"></ion-icon>
