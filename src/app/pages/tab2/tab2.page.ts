@@ -13,7 +13,7 @@ export class Tab2Page {
   cargandoGeo = false;
   post = {
     mensaje: '',
-    coords: null as string | null,
+    coords: null as string | null,// se añade "as string | null" para permitir valores de tipo `string` y `null`
     posicion: false,
   };
 
@@ -51,7 +51,7 @@ export class Tab2Page {
         this.cargandoGeo = false;
         const coords = `${resp.coords.latitude},${resp.coords.longitude}`;
         console.log(coords);
-        this.post.coords = coords;
+        this.post.coords = coords;// se asigna el valor de tipo `string` a la propiedad `coords`
       })
       .catch((error) => {
         console.log('Error al obtener la ubicación', error);
