@@ -4,9 +4,10 @@
 
     <ion-buttons slot="end">
       <!-- si el post es menor q 1 desabilito sy se escibe 1 ó + palabras habilito -->
+      <!-- cualquiera de de las sea true se desabilita ....(post.mensaje.length < 1 || cargandoGeo )-->
       <ion-button
         (click)="crearPost()"
-        [disabled]="post.mensaje.length < 1 "
+        [disabled]="post.mensaje.length < 1 || cargandoGeo "
         class="btn-font"
       >
         Compartir
