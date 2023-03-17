@@ -312,11 +312,28 @@ this.geoLocation.getCurrentPosition().then((resp)=>{
 
     })
 ```
+* Añadir al config.xml
 
+```
+URL
+https://github.com/apache/cordova-plugin-geolocation
 
+```
+```
+Codigo
+<edit-config target="NSLocationWhenInUseUsageDescription" file="*-Info.plist" mode="merge">
+    <string>Necesito tu autoricación para saber tu ubicación</string>
+</edit-config>
+```
 
+## 🗺 Map --> account.mapbox.com/
 
-
+* Registrarse
+* Luego ir a (https://docs.mapbox.com/mapbox-gl-js/guides/install/) y copiar el CDN y pegarlo en index.html antes del cierre del </head>:
+ ```
+ <script src='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css' rel='stylesheet' />
+```
 
 
 
