@@ -335,71 +335,80 @@ Codigo
 <link href='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css' rel='stylesheet' />
 ```
 ## 📸 Cámara de fotos
-* Lo realizo con Cordova Camera Plugin Docs.
-* URL
+* Lo realizo con Capacitor.
+* 1.- Instalar Capacitor en un proyecto ya existente: usando la consola siempre dentro de la carpeta principal de tu proyecto ( la misma carpeta desde la que normalmente ejecutas ionic serve para lanzar la app ), ejecuta el comando:
+ <br>
 ```
-https://ionicframework.com/docs/v5/native/camera
+ionic integrations enable capacitor
 ```
-* Comandos
+eso es un script que instala automaticamente @capacitor/core, @capacitor/cli, y hace el 'capacitor init' con los datos que de tu aplicacion si los encuentra.
+<br>
+
+* 2.- Inicializar Capacitor: aunque el paso anterior debe detectar el nombre y el ID de tu app y hacer el 'init' los tutoriales recomiendan este paso ( ej: en mi caso el nombre de la app detectado automatico en paso 1 no coincidia con el del xml ):
+ <br>
+✔ 2.1 Busca el id y name de tu app en el archivo config.xml en la carpeta raiz del proyecto, los datos estan al inicio y en mi caso decia esto, si no tocaste el tuyo probablemente sea igual:
 ```
-$ npm install cordova-plugin-camera 
-$ npm install @awesome-cordova-plugins/camera 
-$ ionic cap sync
-```
-* config.xml
-```
- <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
-        <string>Necesito tu autoricación para saber tu ubicación</string>
-    </edit-config>
-    <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
-        <string>Ne necesita acceso para tomar fotos</string>
-    </edit-config>
-    <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryUsageDescription">
-        <string>Ne necesita acceso a la librería</string>
-    </edit-config>
-    <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
-        <string>Ne necesita acceso para a la localización</string>
-    </edit-config>
-    <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryAddUsageDescription">
-        <string>Ne necesita acceso para guardar a las fotos</string>
-    </edit-config>
-    <access origin="*" />
-    <allow-navigation href="*" />
-    <allow-intent href="http://*/*" />
-    <allow-intent href="https://*/*" />
+<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>MyApp</name>
  ```
- * En FotosgramTutu\resources\android\xml\network_security_config.xml
+ <br>
+✔ 2.2 ejecuta el comando de inicializacion:
 ```
-<?xml version="1.0" encoding="utf-8"?>
-<network-security-config>
-    <base-config cleartextTrafficPermitted="true">
-        <trust-anchors>
-            <certificates src="system" />
-        </trust-anchors>
-    </base-config>
-    <domain-config cleartextTrafficPermitted="true">
-        <domain includeSubdomains="true">localhost</domain>
-        <domain includeSubdomains="true">Tu IP</domain>
-    </domain-config>
-</network-security-config>
+npx cap init MyApp io.ionic.starter
 ```
-* Enviroments
+responde Yes al mensaje:
+<br>
+
+? capacitor.config.json already contains cordova preferences. Overwrite with values from config.xml? Yes
+<br>
+* 3.-Ionic build : Debes tener al menos 1 build hecho, en nuestro caso del curso hemos hecho ya muchos para probar la app, pero para estar seguro de que exista la capteta www en la raiz del proyecto ( capacitor la requiere ) ejecuta:
 ```
-export const environment = {
-  production: true,
-  url : 'http://000.000.0.00:3000'
-};
+ionic build
 ```
-* Index.html
+* 4.- Añadir Plataformas: Cordova maneja las plataformas dentro de la carpeta 'platforms' pero Capacitor usa una estructura de carpetas directamente a la raiz del proyecto, creando una para android , otra para ios y una tercera para los recursos: resources.
+para añadir las plataformas ( ambas o solo una si deseas ):<br>
 ```
-<script src="cordova.js"></script>
+npx cap add android
+npx cap add ios
 ```
+<br>
+Nota❗: Capacitor migra automaticamente las dependencias de cordova y plugins que sean compatibles con el , pero no quites las de cordova hasta que estes seguro de lo que haces ( no te afecta para estas pruebas que se queden ahi ),
+<br>
+* 5.- Lanzar los IDE android o iOS : En este punto ya puedes hacer pruebas en dispositivos fisicos y emuladores, o saltar al punto 6 para implementar el plugin de la camara en capacitor.
 
+Para abrir las IDE desde la linea de comando puedes uno de estos segun sea el caso, o abrir la carpeta correspondiente ( android o ios desde la IDE ):
+<br>
+```
+npx cap open android
+npx cap open ios 
+```
+* 6.- Usar plugin Capacitor para la camara (D:\ionic\FotosgramTutu\src\app\pages\tab2\tab2.page.ts)
+ ```
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+  tempImages: string[] = [];
+ async Opencamara() {
+  const image = await Camera.getPhoto({
+      quality: 60,
+      allowEditing: false,
+      correctOrientation: true,
+      resultType: CameraResultType.Uri,
+      source: CameraSource.Camera
+      /*   source: CameraSource.Camera     */
+    });
 
+    const img = window.Ionic.WebView.convertFileSrc( image);
 
+/*     this.postService.subirImagen( imageData ); */
+    this.tempImages.push( img );
+  }
+```
+* En D:\ionic\FotosgramTutu\src\main.ts
+```
+import { defineCustomElements } from '@ionic/pwa-elements/loader';
 
-
-
+// Call the element loader after the platform has been bootstrapped
+defineCustomElements(window);
+```
 
 
 
