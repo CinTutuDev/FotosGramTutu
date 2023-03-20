@@ -334,9 +334,66 @@ Codigo
  <script src='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js'></script>
 <link href='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css' rel='stylesheet' />
 ```
-
-
-
+## 📸 Cámara de fotos
+* Lo realizo con Cordova Camera Plugin Docs.
+* URL
+```
+https://ionicframework.com/docs/v5/native/camera
+```
+* Comandos
+```
+$ npm install cordova-plugin-camera 
+$ npm install @awesome-cordova-plugins/camera 
+$ ionic cap sync
+```
+* config.xml
+```
+ <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
+        <string>Necesito tu autoricación para saber tu ubicación</string>
+    </edit-config>
+    <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
+        <string>Ne necesita acceso para tomar fotos</string>
+    </edit-config>
+    <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryUsageDescription">
+        <string>Ne necesita acceso a la librería</string>
+    </edit-config>
+    <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
+        <string>Ne necesita acceso para a la localización</string>
+    </edit-config>
+    <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryAddUsageDescription">
+        <string>Ne necesita acceso para guardar a las fotos</string>
+    </edit-config>
+    <access origin="*" />
+    <allow-navigation href="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+ ```
+ * En FotosgramTutu\resources\android\xml\network_security_config.xml
+```
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">localhost</domain>
+        <domain includeSubdomains="true">Tu IP</domain>
+    </domain-config>
+</network-security-config>
+```
+* Enviroments
+```
+export const environment = {
+  production: true,
+  url : 'http://000.000.0.00:3000'
+};
+```
+* Index.html
+```
+<script src="cordova.js"></script>
+```
 
 
 
