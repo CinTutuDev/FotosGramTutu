@@ -26,7 +26,11 @@
     <ion-list>
       <ion-item>
         <ion-label>Posición actual</ion-label>
-        <ion-spinner name="lines-small" *ngIf="cargandoGeo"  class="btn-font"></ion-spinner>
+        <ion-spinner
+          name="lines-small"
+          *ngIf="cargandoGeo"
+          class="btn-font"
+        ></ion-spinner>
         <!-- cuando se cambie el valor post.position disparo ionChange -->
         <ion-toggle
           slot="end"
@@ -39,13 +43,13 @@
 
   <ion-row class="ion-text-center">
     <ion-col size="6">
-      <button expand="full" shape="round" class="btn">
+      <button expand="full" class="btn" shape="round" (click)="Opencamara()">
         <ion-icon slot="start" name="camera"></ion-icon>
         Cámara
       </button>
     </ion-col>
     <ion-col size="6">
-      <button expand="full" shape="round" class="btn">
+      <button expand="full" shape="round" class="btn" (click)="libreria()">
         <ion-icon slot="start" name="images"></ion-icon>
         Galería
       </button>
@@ -53,6 +57,16 @@
   </ion-row>
 
   <ion-row>
+    <!-- Mostrar la imagen capturada por la cámara -->
+  <!--   <ion-col size="6">
+      <ion-button expand="full"
+                  shape="round"
+                  (click)="libreria()">
+        <ion-icon slot="start" name="images"></ion-icon>
+        Galería
+      </ion-button>
+    </ion-col> -->
+    <!-- Mostrar las imágenes cargadas desde la galería -->
     <ion-col size="3" *ngFor="let image of tempImages">
       <ion-card>
         <img [src]="image" />

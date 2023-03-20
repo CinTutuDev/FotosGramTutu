@@ -12,6 +12,7 @@ export interface Post {
   imgs?: string[];
   usuario?: Usuario;
   created?: string;
+  coords?: string;
   /*  __v:     number; */
   /* img?:    any[]; */
 }

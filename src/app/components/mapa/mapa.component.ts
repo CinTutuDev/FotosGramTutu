@@ -15,6 +15,10 @@ export class MapaComponent implements OnInit {
       console.error('Las coordenadas no están definidas');
       return;
     }
+    if (!this.mapa) {
+      console.error('El elemento mapa no está definido');
+      return;
+    }
     const latLong = this.coords.split(',');
     if (latLong.length !== 2) {
       console.error('El formato de las coordenadas no es correcto');
