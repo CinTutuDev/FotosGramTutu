@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { PostsService } from '../../services/posts.service';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
-import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Platform } from '@ionic/angular';
 
 declare let window: any;
@@ -25,7 +25,7 @@ export class Tab2Page {
     private postService: PostsService,
     private route: Router,
     private geoLocation: Geolocation,
-    private camera: Camera, private platform: Platform
+    /* private camera: Camera, private platform: Platform */
   ) {}
 
   async crearPost() {
@@ -89,29 +89,21 @@ export class Tab2Page {
       });
     });
   } */
- Opencamara()  {
-
-    const options: CameraOptions = {
-      quality: 60,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      correctOrientation: true,
-      sourceType: this.camera.PictureSourceType.CAMERA
-    };
-    this.camera.getPicture(options).then( ( imageData ) => {
-      // imageData is either a base64 encoded string or a file URI
-      // If it's base64 (DATA_URL):
-
-       const img = window.Ionic.WebView.convertFileSrc( imageData );
-      console.log(img);
-     /*  this.postsService.subirImagen( imageData ); */
+  async Opencamara() {
+    const image = await Camera.getPhoto({
+        quality: 60,
+        allowEditing: false,
+        correctOrientation: true,
+        resultType: CameraResultType.Uri,
+        source: CameraSource.Camera
+        /*   source: CameraSource.Camera     */
+      });
+   
+      const img = window.Ionic.WebView.convertFileSrc( image);
+   
+   /*     this.postService.subirImagen( imageData ); */
       this.tempImages.push( img );
-
-     }, (err) => {
-      // Handle error
-     });
-  }
+    }
   libreria(){}
 
 /*   libreria() {
