@@ -43,10 +43,11 @@
 
   <ion-row class="ion-text-center">
     <ion-col size="6">
-      <button expand="full" class="btn" shape="round" (click)="Opencamara()">
+      <button expand="full" class="btn" shape="round" (click)="getPicture()">
         <ion-icon slot="start" name="camera"></ion-icon>
         Cámara
       </button>
+
     </ion-col>
     <ion-col size="6">
       <button expand="full" shape="round" class="btn" (click)="libreria()">
@@ -57,19 +58,10 @@
   </ion-row>
 
   <ion-row>
-    <!-- Mostrar la imagen capturada por la cámara -->
-  <!--   <ion-col size="6">
-      <ion-button expand="full"
-                  shape="round"
-                  (click)="libreria()">
-        <ion-icon slot="start" name="images"></ion-icon>
-        Galería
-      </ion-button>
-    </ion-col> -->
     <!-- Mostrar las imágenes cargadas desde la galería -->
-    <ion-col size="3" *ngFor="let image of tempImages">
+    <ion-col size="3" >
       <ion-card>
-        <img [src]="image" />
+        <img [src]="tempImages?.webPath" />
       </ion-card>
     </ion-col>
   </ion-row>

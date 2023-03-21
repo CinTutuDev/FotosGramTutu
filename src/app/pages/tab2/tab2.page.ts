@@ -4,6 +4,7 @@ import { PostsService } from '../../services/posts.service';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Platform } from '@ionic/angular';
+import { Capacitor } from '@capacitor/core';
 
 declare let window: any;
 @Component({
@@ -12,8 +13,8 @@ declare let window: any;
   styleUrls: ['tab2.page.scss'],
 })
 export class Tab2Page {
-  tempImages: string[] = [];
-  cameraImage: any;
+  tempImages: string[] | any= [];
+  /* cameraImage: any; */
   cargandoGeo = false;
   post = {
     mensaje: '',
@@ -69,40 +70,28 @@ export class Tab2Page {
   }
 
   /* -------------------------------------------------camara------------------------------------ */
- /*  Opencamara() {
-    this.platform.ready().then(() => {
-      const options: CameraOptions = {
-        quality: 60,
-        destinationType: this.camera.DestinationType.DATA_URL,
-        encodingType: this.camera.EncodingType.JPEG,
-        mediaType: this.camera.MediaType.PICTURE,
-        correctOrientation: true,
-        sourceType: this.camera.PictureSourceType.CAMERA
-      };
-      this.camera.getPicture(options).then((imageData) => {
-        // imageData es una cadena codificada en base64 de la imagen capturada
-        this.cameraImage = 'data:image/jpeg;base64,' + imageData;
-        // Agregar la imagen a la matriz de imágenes cargadas desde la galería
-        this.galleryImages.push(this.cameraImage);
-      }, (err) => {
-        console.log(err);
-      });
-    });
-  } */
-  async Opencamara() {
+
+  checkPlatformForWeb(){
+    if(Capacitor.getPlatform() == 'web') return true;
+    return false;
+  }
+
+  async getPicture() {
     const image = await Camera.getPhoto({
         quality: 60,
-        allowEditing: false,
-        correctOrientation: true,
-        resultType: CameraResultType.Uri,
-        source: CameraSource.Camera
+       /*  allowEditing: false, */
+      /*   correctOrientation: true, */
+      source: CameraSource.Prompt,
+      resultType:this.checkPlatformForWeb()? CameraResultType.DataUrl :  CameraResultType.Uri,
         /*   source: CameraSource.Camera     */
       });
-   
-      const img = window.Ionic.WebView.convertFileSrc( image);
+      console.log('img' , image);
+      this.tempImages = image;
+      if(this.checkPlatformForWeb()) this.tempImages.webPath = image.dataUrl;
+     /*  const img = window.Ionic.WebView.convertFileSrc( image);
    
    /*     this.postService.subirImagen( imageData ); */
-      this.tempImages.push( img );
+    //  this.tempImages.push( img ); 
     }
   libreria(){}
 
