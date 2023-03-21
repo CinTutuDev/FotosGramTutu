@@ -41,28 +41,29 @@
     </ion-list>
   </ion-list>
 
-  <ion-row class="ion-text-center">
-    <ion-col size="6">
-      <button expand="full" class="btn" shape="round" (click)="getPicture()">
-        <ion-icon slot="start" name="camera"></ion-icon>
-        Cámara
-      </button>
 
-    </ion-col>
-    <ion-col size="6">
-      <button expand="full" shape="round" class="btn" (click)="libreria()">
-        <ion-icon slot="start" name="images"></ion-icon>
-        Galería
-      </button>
-    </ion-col>
-  </ion-row>
-
+ 
   <ion-row>
-    <!-- Mostrar las imágenes cargadas desde la galería -->
-    <ion-col size="3" >
-      <ion-card>
-        <img [src]="tempImages?.webPath" />
-      </ion-card>
-    </ion-col>
-  </ion-row>
+    <ion-col size="12" class="ion-text-center">
+ 
+    <button expand="full"
+    expand="block"
+    class="btn ion-margin"
+    shape="round"
+    (click)="addPhotoToGallery()">
+<ion-icon slot="start" name="camera"></ion-icon>
+Cámara
+</button>
+</ion-col>
+</ion-row>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" *ngFor="let photo of postService.photos; index as position">
+          <ion-img [src]="photo.webviewPath" (click)="showActionSheet(photo, position)"></ion-img><!-- borrar imagen -->
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
 </ion-content>

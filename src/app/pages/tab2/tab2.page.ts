@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { PostsService } from '../../services/posts.service';
+import { PostsService, UserPhoto } from '../../services/posts.service';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
-import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-import { Platform } from '@ionic/angular';
-import { Capacitor } from '@capacitor/core';
+import { ActionSheetController } from '@ionic/angular';
 
 declare let window: any;
 @Component({
@@ -14,6 +12,7 @@ declare let window: any;
 })
 export class Tab2Page {
   tempImages: string[] | any= [];
+  tempImages2: string[] | any= [];
   /* cameraImage: any; */
   cargandoGeo = false;
   post = {
@@ -23,11 +22,12 @@ export class Tab2Page {
   };
 
   constructor(
-    private postService: PostsService,
+    public postService: PostsService,
     private route: Router,
     private geoLocation: Geolocation,
+    public actionSheetController: ActionSheetController
     /* private camera: Camera, private platform: Platform */
-  ) {}
+  ) { this.tempImages = this.tempImages2 }
 
   async crearPost() {
     console.log(this.post);
@@ -71,59 +71,46 @@ export class Tab2Page {
 
   /* -------------------------------------------------camara------------------------------------ */
 
-  checkPlatformForWeb(){
-    if(Capacitor.getPlatform() == 'web') return true;
-    return false;
+ 
+  addPhotoToGallery() {
+    this.postService.addNewToGallery();
   }
+  public async showActionSheet(photo: UserPhoto, position: number) {
+    /* Metodo para opiones de galeria(al thacer click en la foto muestra: ) */
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Opciones',
+      cssClass: 'my-custom-class',
+      buttons: [
+        {
+          text: 'Delete',
+          role: 'destructive',
+          icon: 'trash',
+          handler: () => {
+            this.postService.deletePicture(photo, position);
+          },
+        },
 
-  async getPicture() {
-    const image = await Camera.getPhoto({
-        quality: 60,
-       /*  allowEditing: false, */
-      /*   correctOrientation: true, */
-      source: CameraSource.Prompt,
-      resultType:this.checkPlatformForWeb()? CameraResultType.DataUrl :  CameraResultType.Uri,
-        /*   source: CameraSource.Camera     */
-      });
-      console.log('img' , image);
-      this.tempImages = image;
-      if(this.checkPlatformForWeb()) this.tempImages.webPath = image.dataUrl;
-     /*  const img = window.Ionic.WebView.convertFileSrc( image);
-   
-   /*     this.postService.subirImagen( imageData ); */
-    //  this.tempImages.push( img ); 
-    }
-  libreria(){}
+        {
+          text: 'Cancel',
+          icon: 'close',
+          role: 'cancel',
+          handler: () => {
+            // Nothing to do, action sheet is automatically closed
+          },
+        },
+        {
+          text: 'Share',
+          icon: 'share-social-sharp',
+          data: {
+            action: 'share',
+          },
+        },
 
-/*   libreria() {
-
-    const options: CameraOptions = {
-      quality: 60,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      correctOrientation: true,
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
-    };
-
-    this.procesarImagen( options );
-
-  } */
-
-/* 
-  procesarImagen( options: CameraOptions ) {
-
-    this.camera.getPicture(options).then( ( imageData ) => {
-      // imageData is either a base64 encoded string or a file URI
-      // If it's base64 (DATA_URL):
-
-       const img = window.Ionic.WebView.convertFileSrc( imageData );
-
-       this.postsService.subirImagen( imageData );
-      this.tempImages.push( img );
-
-     }, (err) => {
-     // Handle error
+      ],
     });
-  }  */
+    await actionSheet.present();
+  }
+  async ngOnInit() {
+    await this.postService.loadSaved();
+  }
 }
