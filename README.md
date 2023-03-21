@@ -410,6 +410,64 @@ import { defineCustomElements } from '@ionic/pwa-elements/loader';
 defineCustomElements(window);
 ```
 
+## 🐛 Android Errores
 
+```
+ *Necesitamos cambiar las dependecias
+	  -Este es el error que sale: 
+
+"Caused by: org.gradle.internal.metaobject.AbstractDynamicObject$CustomMessageMissingMethodException: Could not find method compile() for arguments [{name=barcodescanner-release-2.1.5, ext=aar}] on object of type org.gradle.api.internal.artifacts.dsl.dependencies.DefaultDependencyHandler."
+ 
+🔨SOLUCIÓN
+
+	Cambiar las dependencias de "compile" a "implementation"
+
+	-File-->ProyectStructure-->Dependencias->"Las que estan subrayadas"-->Cambiar en "configuration" : compile -> implemention
+
+```
+* Si saliera este error:
+```
+"Android 10 doesn't support "whitelist plugin", when I add android platform it skips whitelist plugin which cause "file transfer plugin" issues when building or running the application" 
+En esta URL se soluciona:
+https://stackoverflow.com/questions/68896148/android-10-doesnt-support-whitelist-plugin
+
+* Instalacion:
+ npm i https://github.com/apache/cordova-plugin-file-transfer.git 
+ to install plugin and then:
+ npm install @awesome-cordova-plugins/file-transfer
+ then
+ ionic cap sync 
+
+I needed this line in my config.xml as well
+<preference name="AndroidInsecureFileModeEnabled" value="true" />
+
+```
+## ![androide36](https://user-images.githubusercontent.com/71487857/199188171-195d30ba-e4b6-4f3f-bea1-bbf09369c70a.jpg) LEVANTAR APP EN ANDROID
+```
+1º Capacitor
+  ionic capacitor add android
+
+2º Para actualizar android
+  ionic capacitor copy android
+
+3º Iniciar en android studio
+  ionic capacitor build android
+		-Levantar en el movil 
+		ionic capacitor run android
+
+```
+## ↪️ Live reload Android
+
+```
+ $ ionic capacitor run android -l --external
+```
+## 🔎 Herramientas de desarrollo
+
+```
+More tools --> remote deivces
+*Si no lo encuentro escribo esto :
+chrome://inspect/#devices
+*En Port forwarding... poner el puerto (localhost:8100) y darle a done
+```
 
 
