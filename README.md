@@ -410,6 +410,38 @@ import { defineCustomElements } from '@ionic/pwa-elements/loader';
 defineCustomElements(window);
 ```
 
+## 🐛 Android Errores
+
+```
+ *Necesitamos cambiar las dependecias
+	  -Este es el error que sale: 
+
+"Caused by: org.gradle.internal.metaobject.AbstractDynamicObject$CustomMessageMissingMethodException: Could not find method compile() for arguments [{name=barcodescanner-release-2.1.5, ext=aar}] on object of type org.gradle.api.internal.artifacts.dsl.dependencies.DefaultDependencyHandler."
+ 
+🔨SOLUCIÓN
+
+	Cambiar las dependencias de "compile" a "implementation"
+
+	-File-->ProyectStructure-->Dependencias->"Las que estan subrayadas"-->Cambiar en "configuration" : compile -> implemention
+
+```
+* Si saliera este error:
+```
+"Android 10 doesn't support "whitelist plugin", when I add android platform it skips whitelist plugin which cause "file transfer plugin" issues when building or running the application" 
+En esta URL se soluciona:
+https://stackoverflow.com/questions/68896148/android-10-doesnt-support-whitelist-plugin
+
+* Instalacion:
+ npm i https://github.com/apache/cordova-plugin-file-transfer.git 
+ to install plugin and then:
+ npm install @awesome-cordova-plugins/file-transfer
+ then
+ ionic cap sync 
+
+I needed this line in my config.xml as well
+<preference name="AndroidInsecureFileModeEnabled" value="true" />
+
+```
 
 
 
