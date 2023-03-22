@@ -115,8 +115,8 @@
         <string>Ne necesita acceso para guardar a las fotos</string>
     </edit-config>
     <access origin="*" />
-    <allow-navigation href="*" />
-    <allow-intent href="http://*/*" />
-    <allow-intent href="https://*/*" />
-    <plugin name="cordova-plugin-request-location-accuracy" source="npm" />
+<allow-navigation href="*" />
+<allow-intent href="http://*/*" />
+<allow-intent href="https://*/*" />
+  <!--   <plugin name="cordova-plugin-request-location-accuracy" source="npm" /> -->
 </widget>
