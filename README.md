@@ -1,7 +1,9 @@
- # <p align="center"> ![150px](https://user-images.githubusercontent.com/71487857/223967883-f382f0f3-e3cf-49c8-a99e-3484fac81a52.png)  App para IOS, Android, Chrome.</p> 
- # <p align="center"> Proyecto realizado con ![angular](https://user-images.githubusercontent.com/71487857/212993270-3cf1454e-f0d7-4164-bc01-20d5fe6469cd.png)Angular/![descarga](https://user-images.githubusercontent.com/71487857/212993697-6234ef26-0e4a-40ce-bc8a-a9bfa858a74b.png)Ionic</p> 
+ # <p align="center"> ![150px](https://user-images.githubusercontent.com/71487857/223967883-f382f0f3-e3cf-49c8-a99e-3484fac81a52.png)  App para IOS, Android, Chrome.
+<img src="https://readme-typing-svg.demolab.com?font=Libre+Baskerville&size=45&duration=3100&pause=500&color=ff3d5c&center=true&vCenter=true&width=940&lines=FotosGramTutu" align="middle" alt="fotosgram" width="100%"/>
+ </p> 
  
-<img src="https://readme-typing-svg.demolab.com?font=Libre+Baskerville&size=40&duration=3100&pause=500&color=ff3d5c&center=true&vCenter=true&width=940&lines=FotosGramTutu" align="middle" alt="fotosgram" width="100%"/>
+ # <p align="center"> Proyecto realizado con ![angular](https://user-images.githubusercontent.com/71487857/212993270-3cf1454e-f0d7-4164-bc01-20d5fe6469cd.png)Angular/![descarga](https://user-images.githubusercontent.com/71487857/212993697-6234ef26-0e4a-40ce-bc8a-a9bfa858a74b.png)Ionic</p> 
+
  
 
 ## Creo el proyecto con tabs:
