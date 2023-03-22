@@ -41,27 +41,31 @@
     </ion-list>
   </ion-list>
 
-  <ion-row>
-    <ion-col size="12" class="ion-text-center">
+  <ion-row class="ion-text-center">
+    <ion-col size="6">
       <button
         expand="full"
         expand="block"
         class="btn ion-margin"
         shape="round"
-        (click)="addPhotoToGallery()"
+        (click)="camara()"
       >
         <ion-icon slot="start" name="camera"></ion-icon>
         Cámara
+      </button>
+    </ion-col>
+
+    <ion-col size="6">
+      <button expand="full" shape="round" class="btn ion-margin" (click)="''">
+        <ion-icon slot="start" name="images"></ion-icon>
+        Galería
       </button>
     </ion-col>
   </ion-row>
 
   <ion-grid>
     <ion-row>
-      <ion-col
-        size="6"
-        *ngFor="let photo of postService.photos; index as position"
-      >
+      <ion-col size="6" *ngFor="let photo of tempImages; index as position">
         <ion-img
           [src]="photo.webviewPath"
           (click)="showActionSheet(photo, position)"
@@ -70,4 +74,13 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  <ion-content>
+    <ion-slides pager="true">
+      <ion-slide *ngFor="let image of tempImages">
+        <ion-img [src]="image.webviewPath"></ion-img>
+       <!--  <h1>{{image.filepath}}</h1> -->
+      </ion-slide>
+    </ion-slides>
+  </ion-content>
 </ion-content>

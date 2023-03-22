@@ -4,7 +4,8 @@ import { environment } from '../../environments/environment';
 import { RespuestaPosts, Post } from '../interfaces/interfaces';
 import { UsuarioService } from './usuario.service';
 import { Platform } from '@ionic/angular';
-import {
+/* import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx'; */
+/* import {
   Camera,
   CameraResultType,
   CameraSource,
@@ -12,17 +13,17 @@ import {
 } from '@capacitor/camera';
 import { Capacitor } from '@capacitor/core';
 import { Preferences } from '@capacitor/preferences';
-import { Filesystem, Directory } from '@capacitor/filesystem';
+import { Filesystem, Directory } from '@capacitor/filesystem'; */
 const URL = environment.url;
 
 @Injectable({
   providedIn: 'root',
 })
 export class PostsService {
-  public photos: UserPhoto[] | any = [];
+ /*  public photos: UserPhoto[] | any = [];
   private PHOTO_STORAGE: string | any = 'photos';
   private platform: Platform;
-
+ */
   paginasgPosts = 0;
 
   nuevoPost = new EventEmitter<Post>();
@@ -32,7 +33,7 @@ export class PostsService {
     private usuarioService: UsuarioService,
     platform: Platform
   ) {
-    this.platform = platform;
+    /* this.platform = platform; */
   }
 
   getPosts(pull: boolean = false) {
@@ -63,8 +64,27 @@ export class PostsService {
         });
     });
   }
+/* --------------------------------------------------Servicio de camara-------------------------------------------- */
+/*  subirImagen( img: string ) {
 
-  public async addNewToGallery() {
+  const options: FileUploadOptions = {
+    fileKey: 'image',
+    headers: {
+      'x-token': this.usuarioService.token
+    }
+  };
+
+  const fileTransfer: FileTransferObject = this.fileTransfer.create();
+
+  fileTransfer.upload( img, `${ URL }/posts/upload`, options )
+    .then( data => {
+      console.log(data);
+    }).catch( err => {
+      console.log('error en carga', err);
+    });
+
+}  */
+/*   public async camara() {
     // Take a photo
     const capturedPhoto = await Camera.getPhoto({
       resultType: CameraResultType.Uri,
@@ -73,7 +93,7 @@ export class PostsService {
     });
 
     // Save the picture and add it to photo collection
-    const savedImageFile = await this.savePicture(capturedPhoto);
+    const savedImageFile = await this.guardarFoto(capturedPhoto);
     this.photos.unshift(savedImageFile);
 
     Preferences.set({
@@ -82,7 +102,7 @@ export class PostsService {
     });
   }
 
-  private async savePicture(photo: Photo) {
+  private async guardarFoto(photo: Photo) {
     // Convert photo to base64 format, required by Filesystem API to save
     const base64Data = await this.readAsBase64(photo);
 
@@ -174,8 +194,9 @@ export class PostsService {
       };
       reader.readAsDataURL(blob);
     });
-}
-export interface UserPhoto {
+    export interface UserPhoto {
   filepath: string;
   webviewPath: string;
+}
+ */
 }

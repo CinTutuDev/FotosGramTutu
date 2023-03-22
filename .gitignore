@@ -21,6 +21,8 @@ log.txt
 /.ionic
 /www
 /platforms
+plugins/android.json
+plugins/ios.json
 /plugins
 
 # Compiled output
@@ -66,3 +68,4 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+UserInterfaceState.xcuserstate
