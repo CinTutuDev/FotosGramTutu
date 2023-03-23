@@ -64,6 +64,8 @@ export class PostsService {
         });
     });
   }
+
+  
 /* --------------------------------------------------Servicio de camara-------------------------------------------- */
 /*  subirImagen( img: string ) {
 

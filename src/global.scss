@@ -110,6 +110,7 @@ ion-toggle {
 /* Without setting height the slides will take up the height of the slide's content */
 ion-slides.slide-foto {
   height: 50%;
+  width: 50%;
 }
 ion-title.title-large {
   color: #ff8c24;
@@ -119,7 +120,7 @@ ion-title.title-large {
 ion-title {
   --color: #000;
 }
-
+/* 
 ion-toolbar {
   /* --background: #c897d8; */
-}
+//} */

@@ -56,9 +56,9 @@
     </ion-col>
 
     <ion-col size="6">
-      <button expand="full" shape="round" class="btn ion-margin" (click)="''">
-        <ion-icon slot="start" name="images"></ion-icon>
-        Galería
+      <button expand="full" expand="block" class="btn ion-margin" shape="round" (click)="libreria()">
+        <ion-icon slot="start" name="camera"></ion-icon>
+        Galeria
       </button>
     </ion-col>
   </ion-row>
@@ -66,25 +66,28 @@
   <ion-grid>
     <ion-row>
       <ion-col size="6" *ngFor="let photo of tempImages; index as position">
-        <ion-img
-          [src]="photo.webviewPath"
-          (click)="showActionSheet(photo, position)"
-        ></ion-img
+        <ion-img [src]="photo.webviewPath"></ion-img
         ><!-- borrar imagen -->
       </ion-col>
     </ion-row>
   </ion-grid>
- 
-  <ion-content>
-    <ion-toolbar>
-      <ion-title class="ion-text-center title-large">Carrusel de fotos</ion-title>
-    </ion-toolbar>
 
+  <ion-toolbar>
+    <ion-title class="ion-text-center title-large">Carrusel de fotos</ion-title>
+  </ion-toolbar>
+
+  <ion-content>
     <ion-slides pager="true" class="slide-foto">
-      <ion-slide *ngFor="let image of tempImages">    
-        <ion-img [src]="image.webviewPath| imageSanitizer" *ngIf="imageSanitizerRequired"></ion-img>
-       <ion-img [src]="image.webviewPath" *ngIf="!imageSanitizerRequired"></ion-img>
-       <!--  <h1>{{image.filepath}}</h1> -->
+      <ion-slide *ngFor="let image of tempImages">
+        <ion-img
+          [src]="image.webviewPath| imageSanitizer"
+          *ngIf="imageSanitizerRequired"
+        ></ion-img>
+        <ion-img
+          [src]="image.webviewPath"
+          *ngIf="!imageSanitizerRequired"
+        ></ion-img>
+        <!--  <h1>{{image.filepath}}</h1> -->
       </ion-slide>
     </ion-slides>
   </ion-content>
