@@ -27,6 +27,7 @@ export class Tab2Page {
   /* public photos: UserPhoto[] | any = []; */
   private PHOTO_STORAGE: string | any = 'photos';
   private platform: Platform;
+  imageSanitizerRequired = false;
 
   /* cameraImage: any; */
   cargandoGeo = false;
@@ -43,7 +44,13 @@ export class Tab2Page {
     public actionSheetController: ActionSheetController,
     platform: Platform
     /* private camera: Camera, private platform: Platform */
-  ) {/*  this.tempImages = this.tempImages2  */this.platform = platform;}
+  ) {/*  this.tempImages = this.tempImages2  */
+  this.platform = platform;
+
+  if (this.platform.is('ios')){
+    this.imageSanitizerRequired = true;
+  }
+}
 
   async crearPost() {
     console.log(this.post);
