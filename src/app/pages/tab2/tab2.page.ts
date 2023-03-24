@@ -3,7 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PostsService } from '../../services/posts.service';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
-import { ActionSheetController, LoadingController } from '@ionic/angular';
+import {
+  ActionSheetController,
+  LoadingController,
+  ToastController,
+} from '@ionic/angular';
 import { Platform } from '@ionic/angular';
 import {
   Camera,
@@ -13,24 +17,28 @@ import {
   Photo,
   GalleryPhoto,
 } from '@capacitor/camera';
-import { Capacitor } from '@capacitor/core';
+import { Capacitor, Plugins } from '@capacitor/core';
 import { Preferences } from '@capacitor/preferences';
 import { Filesystem, Directory } from '@capacitor/filesystem';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UsuarioService } from '../../services/usuario.service';
-import { finalize } from 'rxjs';
+
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+// Manejo de errores
+import { throwError, catchError, finalize } from 'rxjs';
 
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss'],
 })
-export class Tab2Page  {
-  tempImages: string[] | any = [];
+export class Tab2Page {
+  tempImages: SafeResourceUrl[] = [];
   private platform: Platform;
   imageSanitizerRequired = false;
-
+  loading: any; // indicador progreso de carga de imagen
+   URL : any = environment.url;
   /* cameraImage: any; */
   cargandoGeo = false;
   post = {
@@ -40,19 +48,17 @@ export class Tab2Page  {
   };
 
   constructor(
+    private sanitizer: DomSanitizer,
     public postService: PostsService,
     private route: Router,
     private geoLocation: Geolocation,
     public actionSheetController: ActionSheetController,
-    private loader: LoadingController,
     private usuarioService: UsuarioService,
     private http: HttpClient,
-    
-
-    platform: Platform
-    /* private camera: Camera, private platform: Platform */
+    platform: Platform,
+    private loader: LoadingController,
+    private toastCtrl: ToastController
   ) {
-    /*  this.tempImages = this.tempImages2  */
     this.platform = platform;
 
     if (this.platform.is('ios')) {
@@ -100,142 +106,187 @@ export class Tab2Page  {
   }
 
   /* --------------------------------------------------Servicio de camara-------------------------------------------- */
-  async procesarImagen(image: Photo) {
-    // Write the file to the data directory
-    const fileName= new Date().getTime() + '.jpeg';
-    const base64Data = await this.readAsBase64(image);
-
-    const savedFile = await Filesystem.writeFile({
-      path: fileName,
-      data: base64Data,
-      directory: Directory.Data,
-    });
-
-    const readFile = await Filesystem.readFile({
-      path: fileName,
-      directory: Directory.Data
-    });
-
-    this.tempImages.unshift({
-      filepath: 'soon....',
-      webviewPath: image.webPath,
-      data:`data:image/jpeg;base64,${readFile.data}`,
-      name:'f',
-    });
-    const imagen: UserPhoto = {
-      filepath: base64Data,
-      webviewPath: image.webPath!,
-      data: `data:image/jpeg;base64,${readFile.data}`,
-      name: fileName,
-      saved: false
-    }
-    this.subirImg(imagen)
-  }
-  async subirImg(file: UserPhoto){
-    const response = await fetch(file.data);
-    const blob = await response.blob();
-    const formData = new FormData();
-    formData.append('image', blob, file.name);
-    this.uploadData(formData);
-  }
-
-  private async readAsBase64(photo: Photo) {
-    // "hybrid" will detect Cordova or Capacitor
-    if (this.platform.is('hybrid')) {
-      // Read the file into base64 format
-      const file = await Filesystem.readFile({
-        path: photo.path!,
-      });
-
-      return file.data;
-    } else {
-      // Fetch the photo, read as a blob, then convert to base64 format
-      const response = await fetch(photo.webPath!);
-      const blob = await response.blob();
-
-      return (await this.convertBlobToBase64(blob)) as string;
-    }
-  }
-  private convertBlobToBase64 = (blob: Blob) =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader;
-      reader.onerror = reject;
-      reader.onload = () => {
-        resolve(reader.result);
-      };
-      reader.readAsDataURL(blob);
-    });
-
-    async uploadData(formData: FormData){
-
-      const loading = await this.loader.create({
-        message: 'cargando imagen...'
-      });
-      await loading.present();
-      const URL = environment.url;
-      const url = `${URL}/post/upload`;
-      const headers = new HttpHeaders({
-      'x-token': this.usuarioService.token!
-      })
-      this.http.post(url, formData, {headers}).pipe(finalize(()=>{
-        loading.dismiss();
-      })).subscribe((res:any)=>{
-        if(res['success']){
-          this.subirImagen('file upload complete');
-        }
-      })
-    }
-
-  subirImagen( img: string ) {
-
- /*  const options: FileUploadOptions = {
-    fileKey: 'image',
-    headers: {
-      'x-token': this.usuarioService.token
-    }
-  }; */
-/*   const fileTransfer= Filesystem.appendFile()
-
-
-  fileTransfer.upload( img, `${ URL }/posts/upload`, options )
-    .then( (data: any) => {
-      console.log(data);
-    }).catch( (er:any) => {
-      console.log('error en carga', er);
-    });
- */
-}
-
-
 
   async camara() {
-    // Take a photo
-    const image = await Camera.getPhoto({
+    // configurar opciones
+    const options = {
+      quality: 60,
+      allowEditing: false,
+      correctOrientation: true,
       resultType: CameraResultType.Uri,
       source: CameraSource.Camera,
-      quality: 100,
-    });
-    /* this.tempImages.unshift({
-      filepath: 'soon....',
-      webviewPath: image.webPath,
-    }); */
-    this.procesarImagen(image)
+    };
+    // obtener foto: puede ser un metodo aparte
+
+    try {
+      const image = await Camera.getPhoto(options);
+      // sanitizar la url de la imagen
+      const img = this.sanitizer.bypassSecurityTrustResourceUrl(
+        image && image.webPath!
+      );
+      // empujar la imagena nuestro array temporal
+      this.tempImages.push(img);
+      // llamar a servicio que sube la imagen al servidor
+      this.subirImagenXHR(image.webPath!);
+    } catch (err) {
+      // capturar error e indicarlo
+      console.error(err);
+    }
+    this.procesarImagen(CameraSource.Camera);
   }
 
- async libreria() { // Take a photo
-    const image = await Camera.getPhoto({
+  // captura la imagen en el dispositivo
+  async procesarImagen(source: CameraSource) {
+    // configurar opciones
+    const options = {
+      quality: 80,
+      allowEditing: false,
+      correctOrientation: true,
       resultType: CameraResultType.Uri,
-      source: CameraSource.Camera,
-      quality: 100,
+      source, // recibida como parametro
+    };
+    // obtener la foto en 'image'
+    try {
+      const image = await Camera.getPhoto(options);
+      // sanitizar la url de la imagen
+      const img = this.sanitizer.bypassSecurityTrustResourceUrl(
+        image && image.webPath!
+      );
+      // empujar la imagena nuestro array temporal
+      this.tempImages.push(img);
+      // llamar a servicio que sube la imagen al servidor
+      this.subirImagenHttp(image.webPath!);
+    } catch (err) {
+      // capturar error e indicarlo
+      console.error(err);
+    }
+  }
+
+  // metodo para tomar foto usando capacitor
+  async libreria() {
+    // configurar opciones
+    const options = {
+      quality: 60,
+      allowEditing: false,
+      correctOrientation: true,
+      resultType: CameraResultType.Uri,
+      source: CameraSource.Photos,
+    };
+    // obtener foto: puede ser un metodo aparte
+    try {
+      const image = await Camera.getPhoto(options); // sanitizar la url de la imagen
+      const img = this.sanitizer.bypassSecurityTrustResourceUrl(
+        image && image.webPath!
+      );
+      // empujar la imagena nuestro array temporal
+      this.tempImages.push(img);
+      // llamar a servicio que sube la imagen al servidor
+      this.subirImagenXHR(image.webPath!);
+    } catch (err) {
+      // capturar error e indicarlo
+      console.error(err);
+    }
+    this.procesarImagen(CameraSource.Photos);
+  }
+
+  // usar XHR para cargar fotos al backend
+  async subirImagenXHR(webPath: string) {
+    // convertir webPath a Blob
+    const blob = await fetch(webPath).then((resp) => resp.blob());
+    // preparar formulario con archivo como datos
+    const formData = new FormData();
+    formData.append('image', blob, `imagen.jpg`);
+    // abrir la peticion
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', `${URL}/posts/upload`, true);
+    // configurar headers con token
+    xhr.setRequestHeader('x-token', this.usuarioService.token!);
+    // funcion para tomar acciones cuando se complete la peticion
+    xhr.onreadystatechange = function () {
+      if (this.readyState === XMLHttpRequest.DONE) {
+        if (this.status === 200) {
+          // implementar aca lo que se desee al completar la peticion
+          console.log('Imagen subida correctamente');
+        } else {
+          console.error('Error al subir la imagen');
+        }
+      }
+    };
+    // progreso del upload
+    xhr.upload.onprogress = (e) => {
+      if (e.lengthComputable) {
+        const porcientoSubido = (e.loaded / e.total) * 100;
+        console.log(porcientoSubido + '% Subido');
+      }
+    };
+    // enviar archivo
+    xhr.send(formData);
+  }
+
+  // version http con loading + toast y manejo de errores
+  async subirImagenHttp(webPath: string) {
+    // anunciar inicio de upload al usuario
+    this.loading = await this.loader.create({
+      message: 'Enviando al servidor...',
     });
-    /* this.tempImages.unshift({
-      filepath: 'soon....',
-      webviewPath: image.webPath,
-    }); */
-    this.procesarImagen(image)}
+    await this.loading.present();
+    const blob = await fetch(webPath).then((r) => r.blob());
+    return new Promise<boolean>((resolve) => {
+      // headers
+      const headers = new HttpHeaders({
+        'x-token': this.usuarioService.token!,
+      });
+      const formData = new FormData();
+      formData.append('image', blob, `image.jpg`);
+      this.http
+        .post<boolean>(`${URL}/posts/upload`, formData, { headers })
+        .pipe(
+          catchError((e) => this.handleError(e)),
+          finalize(() => this.loading.dismiss())
+        )
+        .subscribe((resp: any) => {
+          if (resp.ok) {
+            this.showToast('Imagen subida correctamente');
+            resolve(true);
+          } else {
+            this.showToast('Error al subir la imagen!');
+            resolve(false);
+          }
+        });
+    });
+  }
+/*   crearPost(post: any) {
+    const headers = new HttpHeaders({
+      'x-token': this.usuarioService.token!,
+    });
+    return new Promise((resolve) => {
+      this.http
+        .post(`${URL}/posts`, post, { headers })
+        .subscribe((resp: any) => {
+          this.nuevoPost.emit(resp['post']);
+          resolve(true);
+        });
+    });
+  }
+ */
 
 
-    
+
+  // manejo de errores
+  private handleError(error: any) {
+    const errMsg = error.message ? error.message : error.toString();
+    return throwError(errMsg);
+  }
+
+  // informar al usuario con Toast
+  private async showToast(message: string) {
+    const toast = await this.toastCtrl.create({
+      message,
+      duration: 2500,
+      position: 'top',
+    });
+    toast.present();
+  }
   /* -------------------------------------------------camara------------------------------------ */
 
   public async showActionSheet(photo: UserPhoto, position: number) {
