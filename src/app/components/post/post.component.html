@@ -10,20 +10,36 @@
     </ion-label>
   </ion-item>
 
-  <!-- <ion-slides mode="ios" pager="ios" scrollbar="ios" pager="true">
-    <ion-slide class="image-slide" [style]=" img1 | domSanitazer ">
-    </ion-slide>
-    <ion-slide
-    class="image-slide"
-    style="background-image: url('assets/2.png')">
-  </ion-slide>
-  <ion-slide
-  class="image-slide"
-  style="background-image: url('assets/3.png')">
-</ion-slide>
-  </ion-slides> -->
+  <ion-slides pager="true" *ngIf="post.imgs.length > 1">
+    <ion-slide *ngFor="let img of post.imgs"
+               class="image-slide"
+               [style.background-image]="'url(' + post.imgs[0] + ')'">
+               <img
+       [src]="img">
 
-  <app-mapa [coords]="post.coords" ></app-mapa>
+    </ion-slide>
+  </ion-slides>
+  <img src="http://192.168.0.17:3000/posts/imagen/{‌{post.user._id}}/{‌{item}}" alt=""> 
+  
+
+  <ion-slides *ngIf="post.imgs.length == 1" [options]="slideSoloOpts">
+    <ion-slide class="image-slide"
+    [style.background-image]="(post.imgs[0] | imagen: post.usuario._id )">
+      
+    </ion-slide>
+  </ion-slides>
+
+
+
+
+
+
+
+
+
+
+
+  <app-mapa [coords]="post.coords" *ngIf="post.coords"></app-mapa>
 
   <ion-item lines="none">
     <ion-icon slot="start" name="heart-outline" color="danger"></ion-icon>

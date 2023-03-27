@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { Camera } from '@awesome-cordova-plugins/camera/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [

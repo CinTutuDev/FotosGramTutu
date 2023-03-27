@@ -5,11 +5,14 @@ import { DomSanitizer } from '@angular/platform-browser';
   name: 'domSanitazer',
 })
 export class DomSanitizerPipe implements PipeTransform {
- 
+
   constructor( private domSanitizer: DomSanitizer ) {}
- 
-  transform(img: string ): any {
-    return  this.domSanitizer.bypassSecurityTrustUrl( img ) ;
+  
+  transform(value: any): any {
+    /* const domImg = `${URL}/posts/imagen/${userId}/${img}`; */
+    
+    return this.domSanitizer.bypassSecurityTrustStyle(value);
+ /*    return  this.domSanitizer.bypassSecurityTrustUrl( img ) ; */
   }
  
 

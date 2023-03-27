@@ -42,11 +42,11 @@ export class UsuarioService {
     const data = { email, password };
 
     return new Promise((resolve) => {
-      this.http.post(`${URL}/user/login`, data).subscribe((resp: any) => {
+      this.http.post(`${URL}/user/login`, data).subscribe(async (resp: any) => {
         console.log(resp);
 
         if (resp['ok']) {
-          this.guardarToken(resp['token']);
+         await this.guardarToken(resp['token']);
           resolve(true);
         } else {
           this.token = null;
@@ -56,23 +56,24 @@ export class UsuarioService {
       });
     });
   }
-  /* --------------------------------------------------------NUEVO USER----------------------------------------------- */
-  /* eL  Usuario es --> export interface Usuario {
-  _id?: string;
-  nombre?: string;
-  avatar?: string;
-  email?: string;
-  password?: string;
+  /* --------------------------------------------------------SALIR----------------------------------------------- */
+  logout(){
+    this.token = null;
+    this.usuario = {};
+    this._storage?.clear();
+    this.navCtrl.navigateRoot(`/login`, {animated:true})
+  }
 
-}
-*/
+  /* --------------------------------------------------------NUEVO USER----------------------------------------------- */
+  
+
   registro(user: Usuario) {
     return new Promise((resolve) => {
-      this.http.post(`${URL}/user/create`, user).subscribe((resp: any) => {
+      this.http.post(`${URL}/user/create`, user).subscribe(async(resp: any) => {
         console.log(resp);
 
         if (resp['ok']) {
-          this.guardarToken(resp['token']);
+        await this.guardarToken(resp['token']);
           resolve(true);
         } else {
           this.token = null;
@@ -94,6 +95,8 @@ export class UsuarioService {
   async guardarToken(token: any) {
     this.token = token;
     await this.storage.set('token', token);
+
+    await this.validaToken()
   }
 
   async cargarToken() {
