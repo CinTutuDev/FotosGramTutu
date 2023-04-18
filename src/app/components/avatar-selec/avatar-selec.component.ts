@@ -7,7 +7,7 @@ import { UsuarioService } from '../../services/usuario.service';
   styleUrls: ['./avatar-selec.component.scss'],
 })
 export class AvatarSelecComponent implements OnInit {
-  @Output() avatarActualChange  = new EventEmitter<string>();
+  @Output() avatarActualChange = new EventEmitter<string>();
 
   @Input() avatarActual: string | undefined;
   avatares = [
@@ -65,11 +65,11 @@ export class AvatarSelecComponent implements OnInit {
     slidesPerView: 3.5,
   };
 
-  constructor(private userService:UsuarioService ) {}
+  constructor(private userService: UsuarioService) {}
 
   async ngOnInit() {
     this.avatarActual = (await this.userService.getUusario()).avatar;
-    this.avatares.forEach(avatar => avatar.seleccionado = false);
+    this.avatares.forEach((avatar) => (avatar.seleccionado = false));
     for (const avatar of this.avatares) {
       if (avatar.img === this.avatarActual) {
         avatar.seleccionado = true;

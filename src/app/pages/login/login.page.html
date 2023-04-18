@@ -1,6 +1,6 @@
 <ion-content>
   <!-- -------------------------------------------------------slides principal----------------------------- -->
-  <ion-slides class="mainSlide" #slidePrincipal >
+  <ion-slides class="mainSlide" #slidePrincipal>
     <ion-slide>
       <form (ngSubmit)="loginUser(fLogin)" #fLogin="ngForm">
         <ion-grid fixed>
@@ -15,8 +15,11 @@
               <ion-list>
                 <ion-item>
                   <ion-label>Email</ion-label>
-                  <ion-input name="email" type="email" required 
-                            [(ngModel)]="loginUsuario.email"              
+                  <ion-input
+                    name="email"
+                    type="email"
+                    required
+                    [(ngModel)]="loginUsuario.email"
                   ></ion-input>
                 </ion-item>
 
@@ -26,7 +29,7 @@
                     name="password"
                     type="password"
                     required
-                    [(ngModel)]="loginUsuario.password" 
+                    [(ngModel)]="loginUsuario.password"
                   ></ion-input>
                 </ion-item>
               </ion-list>
@@ -46,9 +49,10 @@
 
     <ion-slide>
       <ion-grid fixed>
-       
         <!------------------------------------------------ Avatr sectertor  ------------------------->
-        <app-avatar-selec [(avatarActual)]="registerUser.avatar"></app-avatar-selec>
+        <app-avatar-selec
+          [(avatarActual)]="registerUser.avatar"
+        ></app-avatar-selec>
 
         <!-- -------------------------------------------------------Crear usuario -------------------------------------->
         <form (ngSubmit)="crearUser(fLogin)" #fLogin="ngForm">
@@ -57,12 +61,22 @@
               <ion-list>
                 <ion-item>
                   <ion-label>Email</ion-label>
-                  <ion-input name="email" type="email" [(ngModel)]="registerUser.email" required></ion-input>
+                  <ion-input
+                    name="email"
+                    type="email"
+                    [(ngModel)]="registerUser.email"
+                    required
+                  ></ion-input>
                 </ion-item>
 
                 <ion-item>
                   <ion-label>Nombre</ion-label>
-                  <ion-input name="nombre" type="text"  [(ngModel)]="registerUser.nombre" required></ion-input>
+                  <ion-input
+                    name="nombre"
+                    type="text"
+                    [(ngModel)]="registerUser.nombre"
+                    required
+                  ></ion-input>
                 </ion-item>
 
                 <ion-item>

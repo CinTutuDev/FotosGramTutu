@@ -17,15 +17,15 @@ export class Tab1Page implements OnInit {
 
   ngOnInit(): void {
     this.siguiente();
-    this.postsService.nuevoPost.subscribe(post =>{
-        this.posts.unshift(post)
-    })
+    this.postsService.nuevoPost.subscribe((post) => {
+      this.posts.unshift(post);
+    });
   }
 
   recargar(event?: any) {
     this.siguiente(event, true);
     this.habilitado = true;
-      this.posts = [];
+    this.posts = [];
   }
 
   siguiente(event?: any, pull: boolean = false) {

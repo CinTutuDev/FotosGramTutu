@@ -9,17 +9,7 @@ import {
   ToastController,
 } from '@ionic/angular';
 import { Platform } from '@ionic/angular';
-import {
-  Camera,
-  CameraResultType,
-  GalleryImageOptions,
-  CameraSource,
-  Photo,
-  GalleryPhoto,
-} from '@capacitor/camera';
-import { Capacitor, Plugins } from '@capacitor/core';
-import { Preferences } from '@capacitor/preferences';
-import { Filesystem, Directory } from '@capacitor/filesystem';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UsuarioService } from '../../services/usuario.service';
@@ -34,12 +24,12 @@ import { throwError, catchError, finalize } from 'rxjs';
   styleUrls: ['tab2.page.scss'],
 })
 export class Tab2Page {
- /*  tempImages: string[] | any = []; */
+  /*  tempImages: string[] | any = []; */
   tempImages: SafeResourceUrl[] = [];
   private platform: Platform;
   imageSanitizerRequired = false;
   loading: any; // indicador progreso de carga de imagen
-   URL : any = environment.url;
+  URL: any = environment.url;
   /* cameraImage: any; */
   cargandoGeo = false;
   post = {
@@ -57,7 +47,7 @@ export class Tab2Page {
     private usuarioService: UsuarioService,
     private http: HttpClient,
     platform: Platform,
-    private loader: LoadingController,
+
     private toastCtrl: ToastController
   ) {
     this.platform = platform;
@@ -68,7 +58,7 @@ export class Tab2Page {
   }
 
   async crearPost() {
-    console.log('este es el post de tab2',this.post);                  
+    console.log('este es el post de tab2', this.post);
     this.postService.crearPost(this.post);
     console.log(this.post);
     this.post = {
@@ -180,13 +170,13 @@ export class Tab2Page {
       const img = this.sanitizer.bypassSecurityTrustResourceUrl(
         image && image.webPath!
       );
-    
+
       console.log('image', image);
       console.log('img', img);
       // llamar a servicio que sube la imagen al servidor
       this.subirImagenXHR(image.webPath!);
-        // empujar la imagena nuestro array temporal
-        this.tempImages.push(img);
+      // empujar la imagena nuestro array temporal
+      this.tempImages.push(img);
     } catch (err) {
       // capturar error e indicarlo
       console.error(err);
@@ -194,7 +184,6 @@ export class Tab2Page {
     this.procesarImagen(CameraSource.Photos);
   }
 
-  
   // usar XHR para cargar fotos al backend
   async subirImagenXHR(webPath: string) {
     // convertir webPath a Blob
@@ -202,10 +191,10 @@ export class Tab2Page {
     const blob = await fetch(webPath).then((resp) => resp.blob());
     // preparar formulario con archivo como datos
     const formData = new FormData();
-    formData.append('image', blob, );
+    formData.append('image', blob);
     // abrir la peticion
     const xhr = new XMLHttpRequest();
-    
+
     xhr.open('POST', `${URL}/posts/upload`);
     // configurar headers con token
     xhr.setRequestHeader('x-token', this.usuarioService.token!);
@@ -231,30 +220,29 @@ export class Tab2Page {
     xhr.send(formData);
   }
 
-  
   async subirImagenHttp(webPath: string) {
     // convertir webPath a Blob
-    const blob = await fetch(webPath).then(resp => resp.blob());
+    const blob = await fetch(webPath).then((resp) => resp.blob());
     // preparar headers con token
-    const headers = new HttpHeaders ({
-      'x-token': this.usuarioService.token!
+    const headers = new HttpHeaders({
+      'x-token': this.usuarioService.token!,
     });
     // preparar FormData para envio http a servidor
     const formData = new FormData();
     formData.append('image', blob, `image.jpg`);
     // peticion post http al endpoint en servidor
-    this.ShowFormData(formData) 
-    this.http.post<boolean>(`${ URL }/posts/upload`, formData, { headers })
-   
-   
+    this.ShowFormData(formData);
+    this.http
+      .post<boolean>(`${URL}/posts/upload`, formData, { headers })
+
       // manejar errores y resultado
       .pipe(
-        catchError(e => this.handleError(e)), // implementar ese metodo aparte
+        catchError((e) => this.handleError(e)), // implementar ese metodo aparte
         finalize(() => console.log('Carga completada'))
       )
-      .subscribe(ok => {
-        if (ok){
-           console.log('Imagen subida correctamente');
+      .subscribe((ok) => {
+        if (ok) {
+          console.log('Imagen subida correctamente');
         } else {
           console.error('Error al subir la imagen');
         }
@@ -263,22 +251,6 @@ export class Tab2Page {
   ShowFormData(formData: FormData) {
     throw new Error('Method not implemented.');
   }
-/*   crearPost(post: any) {
-    const headers = new HttpHeaders({
-      'x-token': this.usuarioService.token!,
-    });
-    return new Promise((resolve) => {
-      this.http
-        .post(`${URL}/posts`, post, { headers })
-        .subscribe((resp: any) => {
-          this.nuevoPost.emit(resp['post']);
-          resolve(true);
-        });
-    });
-  }
- */
-
-
 
   // manejo de errores
   private handleError(error: any) {

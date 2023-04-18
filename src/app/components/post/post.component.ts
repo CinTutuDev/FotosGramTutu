@@ -14,7 +14,6 @@ export class PostComponent implements OnInit {
     allowSlideNext: false,
     allowSlidePrev: false
   };
-
   constructor() {}
 
   ngOnInit() {}

@@ -13,7 +13,6 @@ import { UsuarioService } from '../../services/usuario.service';
 export class LoginPage implements OnInit {
   @ViewChild('slidePrincipal', { static: true }) slides: IonSlides | any;
 
-
   loginUsuario = {
     email: 'test1@test.com',
     password: '123',
@@ -23,7 +22,7 @@ export class LoginPage implements OnInit {
     email: 'test',
     password: '123',
     nombre: 'Test',
-    avatar: 'av-1.png'
+    avatar: 'av-1.png',
   };
 
   constructor(
@@ -72,11 +71,6 @@ export class LoginPage implements OnInit {
       this.uiService.alertInfo('El correo electrónico ya existe');
     }
   }
-
- /*  seleccionarAvatar(avatar: any) {
-    this.avatares.forEach((av) => (av.seleccionado = false));
-    avatar.seleccionado = true;
-  } */
 
   mostrarRegistro() {
     this.slides.lockSwipes(false);
